@@ -96,3 +96,12 @@ C:\Users\B92k\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mes
 C:\Users\B92k\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh_1.Form1.resources
 C:\Users\B92k\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh_1.Properties.Resources.resources
 C:\Users\B92k\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csproj.GenerateResource.Cache
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\bin\Debug\triangle_mesh 1.exe.config
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.exe
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\bin\Debug\triangle_mesh 1.exe
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\bin\Debug\triangle_mesh 1.pdb
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh_1.Form1.resources
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh_1.Properties.Resources.resources
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csproj.GenerateResource.Cache
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.pdb
+C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csprojResolveAssemblyReference.cache
