@@ -12,20 +12,21 @@ using Tao.Platform.Windows;
 using System.IO;
 using System.Globalization;
 using System.Threading;
+using STL_Tools;
 
 namespace triangle_mesh_1
 {
     public partial class Form1 : Form
     {
-        OpenFileDialog stldosyaSec = new OpenFileDialog();
-        string stldosyaIsmi;
+
         public Form1()
         {
+            /* dot/comma selection for floating point numbers */
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
             InitializeComponent();
-            simEkran.InitializeContexts();
+            monitor.InitializeContexts();
 
         }
         //--------------------------------------------------------------------------
@@ -42,88 +43,6 @@ namespace triangle_mesh_1
         double ty = 0;
             
         //--------------------------------------------------------------------------
-
-        public double[] oku(string trdosyaYolu)
-        {
-            string stlSatir;
-            int i = 0;
-            int i2 = 0;
-
-
-            StreamReader stlOkuyucu = new StreamReader(trdosyaYolu);
-            while (!stlOkuyucu.EndOfStream)
-            {
-                stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", "");
-
-                switch (stlSatir)
-                {
-                    case "solid":
-
-                        while (stlSatir != "endsolid")
-                        {
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", ""); //facetnormal
-
-                            if (stlSatir == "endsolid") // Son satır endsolid denetlemesi
-                            {
-                                break;
-                            }
-
-                            // FaceNormal     
-                            normal[i2] = double.Parse(stlSatir.Substring(11, 14)); //x
-                            normal[i2 + 1] = double.Parse(stlSatir.Substring(25, 14)); //y
-                            normal[i2 + 2] = double.Parse(stlSatir.Substring(39, 14)); //z
-                            normal[i2 + 3] = double.Parse(stlSatir.Substring(11, 14)); //x2
-                            normal[i2 + 4] = double.Parse(stlSatir.Substring(25, 14)); //y2
-                            normal[i2 + 5] = double.Parse(stlSatir.Substring(39, 14)); //z2
-                            normal[i2 + 6] = double.Parse(stlSatir.Substring(11, 14)); //x3
-                            normal[i2 + 7] = double.Parse(stlSatir.Substring(25, 14)); //y3
-                            normal[i2 + 8] = double.Parse(stlSatir.Substring(39, 14)); //z3
-                            //----------------------------------------------------------------------
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", ""); // OuterLoop
-                            //----------------------------------------------------------------------
-                            // Vertex1
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", "");
-                            triangle[i] = double.Parse(stlSatir.Substring(6, 14)); //x1
-                            triangle[i + 1] = double.Parse(stlSatir.Substring(20, 14)); //y1
-                            triangle[i + 2] = double.Parse(stlSatir.Substring(34, 14)); //z1
-                            // Vertex2
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", "");
-                            triangle[i + 3] = double.Parse(stlSatir.Substring(6, 14)); //x2
-                            triangle[i + 4] = double.Parse(stlSatir.Substring(20, 14)); //y2
-                            triangle[i + 5] = double.Parse(stlSatir.Substring(34, 14)); //z2
-                            // Vertex3
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", "");
-                            triangle[i + 6] = double.Parse(stlSatir.Substring(6, 14)); //x3
-                            triangle[i + 7] = double.Parse(stlSatir.Substring(20, 14)); //y3
-                            triangle[i + 8] = double.Parse(stlSatir.Substring(34, 14)); //z3
-                            //----------------------------------------------------------------------
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", ""); // EndLoop
-                            //----------------------------------------------------------------------
-                            stlSatir = stlOkuyucu.ReadLine().Trim().Replace(" ", ""); // endfacet
-
-                            i += 9;
-                            i2 += 9;
-                        }
-
-
-                        break;
-
-                     default:  // Eğer hatalı dosya seçilir ve okuma metodundaki caselerden birine girilemesse program default case e girer ve hata verir
-                       MessageBox.Show("Seçilen stl dosyası hatalı!\nProgram yeniden başlatılacak!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                       Application.Restart();
-                       Environment.Exit(0);               
-                     break;
-
-
-                }
-
-            }
-            noktasayisi = i; // i sayısı okunan dosyada kaç tane koordinat olduğunu gösterir bu sayı kullanılarak draw array yönteminin kaç nokta çizeceği belirlenir, böylece gereksiz işlem yükünden kaçınılır
-            stlOkuyucu.Close();
-
-            return triangle;
-
-        }
 
         //-------------------------------------------------------------------
         float[] isik = new float[] { 0.15f, 0.15f, 0.15f, 1.0f };
@@ -184,264 +103,28 @@ namespace triangle_mesh_1
             Gl.glDisableClientState(Gl.GL_NORMAL_ARRAY);
             Gl.glDisableClientState(Gl.GL_VERTEX_ARRAY);
             Gl.glPopMatrix(); 
-            simEkran.Invalidate();
+            monitor.Invalidate();
         }
 
-        private void simEkran_KeyDown(object sender, KeyEventArgs e)
+
+        private void fileSelectBt_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.W)
-            {
-                timerW.Enabled = true;
-            }
-            if (e.KeyCode == Keys.S)
-            {
-                timerS.Enabled = true ;
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                timerD.Enabled = true ;
-            }
-            if (e.KeyCode == Keys.A)
-            {
-              timerA.Enabled = true;
-            }
-            if (e.KeyCode == Keys.Q)
-            {
-                timerQ.Enabled = true;
-            }
-            if (e.KeyCode == Keys.E)
-            {
-                timerE.Enabled = true;
-            }
+            OpenFileDialog stldosyaSec = new OpenFileDialog();
+            stldosyaSec.Filter = "STL Files|*.stl;*.txt;";
 
-            if (e.KeyCode == Keys.Add)
+            if (stldosyaSec.ShowDialog() == DialogResult.OK)
             {
-                timerArti.Enabled = true;
-            }
+                dosyaSecTxb.Text = stldosyaSec.SafeFileName;
 
-            if (e.KeyCode == Keys.Subtract)
+                STLReader stlReader = new STLReader(stldosyaSec.FileName);
+                stlReader.ReadFile();
+            }
+            else
             {
-                timerEksi.Enabled = true;
+                // intentionally left blank
             }
         }
 
-        private void simEkran_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.W)
-            {
-                rotXBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.S)
-            {
-                rotXeksiBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.D)
-            {
-                rotZeksiBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.A)
-            {
-                rotZBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.Q)
-            {
-                rotYBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.E)
-            {
-                rotYeksiBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.Add)
-            {
-                zoominBt.PerformClick();
-            }
-            if (e.KeyChar == (char)Keys.Subtract)
-            {
-                zoomoutBt.PerformClick();
-            }
-        }
-
-        private void simEkran_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.W)
-            {
-                timerW.Enabled = false;
-            }
-            if (e.KeyCode == Keys.S)
-            {
-                timerS.Enabled = false;
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                timerD.Enabled = false;
-            }
-            if (e.KeyCode == Keys.A)
-            {
-                timerA.Enabled = false;
-            }
-            if (e.KeyCode == Keys.Q)
-            {
-                timerQ.Enabled = false;
-            }
-            if (e.KeyCode == Keys.E)
-            {
-                timerE.Enabled = false;
-            }
-            if (e.KeyCode == Keys.Add)
-            {
-                timerArti.Enabled = false;
-            }
-
-            if (e.KeyCode == Keys.Subtract)
-            {
-                timerEksi.Enabled = false;
-            }
-        }
-
-        private void rotXBt_Click(object sender, EventArgs e)
-        {
-            rotx += 3;
-            draw(rotx,roty,rotz,scale,tx,ty);
-        }
-
-        private void rotXeksiBt_Click(object sender, EventArgs e)
-        {
-            rotx -= 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void rotYBt_Click(object sender, EventArgs e)
-        {
-            roty += 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void rotYeksiBt_Click(object sender, EventArgs e)
-        {
-            roty -= 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-
-        private void rotZBt_Click(object sender, EventArgs e)
-        {
-            rotz += 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void rotZeksiBt_Click(object sender, EventArgs e)
-        {
-            rotz -= 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void zoominBt_Click(object sender, EventArgs e)
-        {
-      
-            scale += 0.1;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void zoomoutBt_Click(object sender, EventArgs e)
-        {
-            if (scale > 0.1)
-            {
-                scale -= 0.1;
-                draw(rotx, roty, rotz, scale, tx, ty);
-            }
-        }
-
-        private void PanUpBt_Click(object sender, EventArgs e)
-        {
-            ty -= 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void PanDownBt_Click(object sender, EventArgs e)
-        {
-            ty += 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void panLeftBt_Click(object sender, EventArgs e)
-        {
-            tx += 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void PanRightBt_Click(object sender, EventArgs e)
-        {
-            tx -= 3;
-            draw(rotx, roty, rotz, scale, tx, ty);
-        }
-
-        private void timerA_Tick(object sender, EventArgs e)
-        {
-            rotZBt.PerformClick();
-        }
-
-        private void timerD_Tick(object sender, EventArgs e)
-        {
-            rotZeksiBt.PerformClick();
-        }
-
-        private void timerW_Tick(object sender, EventArgs e)
-        {
-            rotXBt.PerformClick();
-        }
-
-        private void timerS_Tick(object sender, EventArgs e)
-        {
-            rotXeksiBt.PerformClick();
-        }
-
-        private void timerQ_Tick(object sender, EventArgs e)
-        {
-            rotYBt.PerformClick();
-        }
-
-        private void timerE_Tick(object sender, EventArgs e)
-        {
-            rotYeksiBt.PerformClick();
-        }
-
-        private void timerArti_Tick(object sender, EventArgs e)
-        {
-            zoominBt.PerformClick();
-        }
-
-        private void timerEksi_Tick(object sender, EventArgs e)
-        {
-            zoomoutBt.PerformClick();
-        }
-
-        private void dosyaSecBt_Click(object sender, EventArgs e)
-        {
-            stldosyaSec.Filter = "TXT|*.txt";
-         
-            if(stldosyaSec.ShowDialog() == DialogResult.OK)
-            {
-                dosyaSecTxb.Text = stldosyaSec.SafeFileName;               
-                try
-                {
-                    oku(stldosyaSec.FileName);
-                    draw(rotx, roty, rotz, scale, tx, ty);
-                }
-                catch
-                {
-                    MessageBox.Show("Seçilen stl dosyası hatalı!\nProgram yeniden başlatılacak!", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Application.Restart();
-                    Environment.Exit(0);
-                   
-                }
-            }
-
-        }
-
-        private void dosyaSecTxb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true; // textbox a yazı girişi yasaklandı
-        }
 
 
         
