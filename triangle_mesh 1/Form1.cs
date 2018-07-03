@@ -23,7 +23,7 @@ namespace triangle_mesh_1
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-
+            
             InitializeComponent();
             simEkran.InitializeContexts();
 
