@@ -14,11 +14,14 @@ using System.IO;
 using System.Globalization;
 using System.Threading;
 using STL_Tools;
+using BatuGL;
 
 namespace triangle_mesh_1
 {
     public partial class Form1 : Form
     {
+        Batu_GL glController; // GL controller class instance
+        Batu_GL.VAO_TRIANGLES modelVAO; // 3d model vertex array object
 
         float[] light_1 = new float[] { 0.15f, 0.15f, 0.15f, 1.0f };
         float[] light_2 = new float[] { 0.35f, 0.35f, 0.35f, 1.0f };
@@ -34,11 +37,16 @@ namespace triangle_mesh_1
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
             InitializeComponent();
-            monitor.InitializeContexts();
+
+            glController = new Batu_GL();
+            glController.initialize(monitor);
+            glController.glInit(monitor, Batu_GL.Ortho_Mode.CENTER);
+
         }
 
         public void Draw()
-        { 
+        {
+            glController.glDinamik(monitor, Batu_GL.Ortho_Mode.CENTER);
             //--------------------------------------------
             Gl.glEnable(Gl.GL_LIGHTING);  // Işıklandırma aktif ediliyor  
             //--------------------------------------------
@@ -63,6 +71,7 @@ namespace triangle_mesh_1
             Gl.glEnable(Gl.GL_NORMALIZE); // Işık geçişini yumuşatma 
             //-------------------------------------------
 
+            modelVAO.Draw();
  
             monitor.SwapBuffers();
         }
@@ -78,12 +87,26 @@ namespace triangle_mesh_1
                 dosyaSecTxb.Text = stldosyaSec.SafeFileName;
 
                 STLReader stlReader = new STLReader(stldosyaSec.FileName);
-                stlReader.ReadFile();
+                TriangleMesh[] meshArray = stlReader.ReadFile();
+                modelVAO = new Batu_GL.VAO_TRIANGLES();
+
+                STLExport stlExporter = new STLExport();
+
+                modelVAO.parameterArray = stlExporter.Get_Mesh_Vertices(meshArray);
+                modelVAO.normalArray = stlExporter.Get_Mesh_Normals(meshArray);
+                modelVAO.color = Color.CadetBlue;
+
+                drawTimer.Enabled = true;
             }
             else
             {
                 // intentionally left blank
             }
+        }
+
+        private void drawTimer_Tick(object sender, EventArgs e)
+        {
+            Draw();
         }
 
 

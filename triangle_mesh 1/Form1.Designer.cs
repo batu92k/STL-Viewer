@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.monitor = new Tao.Platform.Windows.SimpleOpenGlControl();
             this.fileSelectBt = new System.Windows.Forms.Button();
             this.dosyaSecTxb = new System.Windows.Forms.TextBox();
+            this.drawTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // monitor
@@ -76,6 +78,11 @@
             this.dosyaSecTxb.Size = new System.Drawing.Size(161, 36);
             this.dosyaSecTxb.TabIndex = 14;
             // 
+            // drawTimer
+            // 
+            this.drawTimer.Interval = 25;
+            this.drawTimer.Tick += new System.EventHandler(this.drawTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -85,7 +92,6 @@
             this.Controls.Add(this.fileSelectBt);
             this.Controls.Add(this.monitor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Triangle Mesh";
@@ -99,6 +105,7 @@
         private Tao.Platform.Windows.SimpleOpenGlControl monitor;
         private System.Windows.Forms.Button fileSelectBt;
         private System.Windows.Forms.TextBox dosyaSecTxb;
+        private System.Windows.Forms.Timer drawTimer;
     }
 }
 
