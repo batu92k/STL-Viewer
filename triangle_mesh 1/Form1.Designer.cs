@@ -94,7 +94,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Triangle Mesh";
+            this.Text = "STL Viewer";
             this.ResumeLayout(false);
             this.PerformLayout();
 

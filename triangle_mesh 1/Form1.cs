@@ -30,6 +30,8 @@ namespace triangle_mesh_1
         float[] lightPos = new float[] { 200f, 200f, -200.0f, 1.0f };
         float[] lightPos2 = new float[] { -200f, 200f, -200.0f, 1.0f };
 
+        int rotation = 0;
+
         public Form1()
         {
             /* dot/comma selection for floating point numbers */
@@ -70,6 +72,10 @@ namespace triangle_mesh_1
             Gl.glMateriali(Gl.GL_FRONT, Gl.GL_SHININESS, 10); // Parlaklık seviyesi ayarla ("1" değerinin yansıması iyi)
             Gl.glEnable(Gl.GL_NORMALIZE); // Işık geçişini yumuşatma 
             //-------------------------------------------
+
+            Gl.glRotatef(rotation, 0.7f, 1.0f, 0.2f);
+            rotation++;
+            rotation = rotation % 360;
 
             modelVAO.Draw();
  
