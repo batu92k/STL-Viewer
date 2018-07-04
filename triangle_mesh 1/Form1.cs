@@ -30,7 +30,7 @@ namespace triangle_mesh_1
         float[] lightPos = new float[] { 200f, 200f, -200.0f, 1.0f };
         float[] lightPos2 = new float[] { -200f, 200f, -200.0f, 1.0f };
 
-        int rotation = 0;
+        int rotation = 0; // model rotation for 3d demonstration
 
         public Form1()
         {
@@ -102,7 +102,22 @@ namespace triangle_mesh_1
                 modelVAO.normalArray = stlExporter.Get_Mesh_Normals(meshArray);
                 modelVAO.color = Color.CadetBlue;
 
-                drawTimer.Enabled = true;
+                if (!stlReader.Get_Process_Error())
+                {
+                    rotation = 0;
+                    drawTimer.Enabled = true;
+                    fileSelectBt.BackColor = Color.DeepSkyBlue;
+                }
+                else
+                {
+                    drawTimer.Enabled = false;
+                    fileSelectBt.BackColor = Color.Tomato;
+
+                    /* if there is an error, deinitialize the gl monitor to clear the screen */
+                    glController.glInit(monitor, Batu_GL.Ortho_Mode.CENTER);
+                    monitor.SwapBuffers();
+                }
+
             }
             else
             {
