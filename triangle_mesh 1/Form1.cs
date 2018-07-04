@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tao.OpenGl;
 using Tao.Platform.Windows;
+using Tao.FreeGlut;
 using System.IO;
 using System.Globalization;
 using System.Threading;
@@ -34,7 +35,6 @@ namespace triangle_mesh_1
 
             InitializeComponent();
             monitor.InitializeContexts();
-
         }
 
         public void Draw()
