@@ -28,7 +28,7 @@ namespace STL_Tools
 
         public string path; // file path
         private enum FileType { NONE, BINARY, ASCII }; // stl file type enumeration
-
+        private bool processError;
 
         /**
         * @brief  Class instance constructor
@@ -40,6 +40,18 @@ namespace STL_Tools
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             path = filePath;
+            processError = false;
+        }
+
+
+        /**
+        * @brief  This function returns the process error value if its true there is an error on process
+        * @param  none
+        * @retval none
+        */
+        public bool Get_Process_Error()
+        {
+            return processError;
         }
 
 
@@ -146,43 +158,52 @@ namespace STL_Tools
                 {
                     TriangleMesh newMesh = new TriangleMesh();
 
-                    /* face normal */
-                    newMesh.normal1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex+1], fileBytes[byteIndex+2], fileBytes[byteIndex+3] }, 0);
-                    byteIndex += 4;
-                    newMesh.normal1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.normal1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
+                    /* this try-catch block will be reviewed */
+                    try
+                    {
+                        /* face normal */
+                        newMesh.normal1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.normal1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.normal1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
 
-                    /* normals of vertex 2 and 3 equals to vertex 1's normals */
-                    newMesh.normal2 = newMesh.normal1;
-                    newMesh.normal3 = newMesh.normal1;
+                        /* normals of vertex 2 and 3 equals to vertex 1's normals */
+                        newMesh.normal2 = newMesh.normal1;
+                        newMesh.normal3 = newMesh.normal1;
 
-                    /* vertex 1 */
-                    newMesh.vert1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.vert1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.vert1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
+                        /* vertex 1 */
+                        newMesh.vert1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.vert1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.vert1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
 
-                    /* vertex 2 */
-                    newMesh.vert2.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.vert2.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.vert2.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
+                        /* vertex 2 */
+                        newMesh.vert2.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.vert2.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.vert2.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
 
-                    /* vertex 3 */
-                    newMesh.vert3.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.vert3.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
-                    newMesh.vert3.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                    byteIndex += 4;
+                        /* vertex 3 */
+                        newMesh.vert3.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.vert3.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
+                        newMesh.vert3.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                        byteIndex += 4;
 
-                    byteIndex += 2; // Attribute byte count
+                        byteIndex += 2; // Attribute byte count
+                    }
+                    catch
+                    {
+                        processError = true;
+                        break;
+                    }
 
                     meshList.Add(newMesh);
 
@@ -191,7 +212,7 @@ namespace STL_Tools
             }
             else
             {
-                meshList = null;
+                // nitentionally left blank
             }
 
             return meshList.ToArray();
@@ -230,35 +251,46 @@ namespace STL_Tools
 
                             TriangleMesh newMesh = new TriangleMesh(); // define new mesh object
 
-                            // FaceNormal 
-                            newMesh.normal1.x = float.Parse(line.Substring(11, 14));
-                            newMesh.normal1.y = float.Parse(line.Substring(25, 14));
-                            newMesh.normal1.z = float.Parse(line.Substring(39, 14));
+                            /* this try-catch block will be reviewed */
+                            try
+                            {
+                                // FaceNormal 
+                                newMesh.normal1.x = float.Parse(line.Substring(11, 14));
+                                newMesh.normal1.y = float.Parse(line.Substring(25, 14));
+                                newMesh.normal1.z = float.Parse(line.Substring(39, 14));
 
-                            /* normals of vertex 2 and 3 equals to vertex 1's normals */
-                            newMesh.normal2 = newMesh.normal1;
-                            newMesh.normal3 = newMesh.normal1;
-                        
-                            //----------------------------------------------------------------------
-                            line = txtReader.ReadLine().Trim().Replace(" ", ""); // OuterLoop
-                            //----------------------------------------------------------------------
+                                /* normals of vertex 2 and 3 equals to vertex 1's normals */
+                                newMesh.normal2 = newMesh.normal1;
+                                newMesh.normal3 = newMesh.normal1;
 
-                            // Vertex1
-                            line = txtReader.ReadLine().Trim().Replace(" ", "");
-                            newMesh.vert1.x = float.Parse(line.Substring(6, 14)); //x1
-                            newMesh.vert1.y = float.Parse(line.Substring(20, 14)); // y1
-                            newMesh.vert1.z = float.Parse(line.Substring(34, 14)); // z1
+                                //----------------------------------------------------------------------
+                                line = txtReader.ReadLine().Trim().Replace(" ", ""); // OuterLoop
+                                //----------------------------------------------------------------------
 
-                            // Vertex2
-                            line = txtReader.ReadLine().Trim().Replace(" ", "");
-                            newMesh.vert2.x = float.Parse(line.Substring(6, 14)); //x1
-                            newMesh.vert2.y = float.Parse(line.Substring(20, 14)); // y1
-                            newMesh.vert2.z = float.Parse(line.Substring(34, 14)); // z1
-                            // Vertex3
-                            line = txtReader.ReadLine().Trim().Replace(" ", "");
-                            newMesh.vert3.x = float.Parse(line.Substring(6, 14)); //x1
-                            newMesh.vert3.y = float.Parse(line.Substring(20, 14)); // y1
-                            newMesh.vert3.z = float.Parse(line.Substring(34, 14)); // z1
+                                // Vertex1
+                                line = txtReader.ReadLine().Trim().Replace(" ", "");
+
+                                newMesh.vert1.x = float.Parse(line.Substring(6, 14)); //x1
+                                newMesh.vert1.y = float.Parse(line.Substring(20, 14)); // y1
+                                newMesh.vert1.z = float.Parse(line.Substring(34, 14)); // z1
+
+                                // Vertex2
+                                line = txtReader.ReadLine().Trim().Replace(" ", "");
+                                newMesh.vert2.x = float.Parse(line.Substring(6, 14)); //x1
+                                newMesh.vert2.y = float.Parse(line.Substring(20, 14)); // y1
+                                newMesh.vert2.z = float.Parse(line.Substring(34, 14)); // z1
+                                // Vertex3
+                                line = txtReader.ReadLine().Trim().Replace(" ", "");
+                                newMesh.vert3.x = float.Parse(line.Substring(6, 14)); //x1
+                                newMesh.vert3.y = float.Parse(line.Substring(20, 14)); // y1
+                                newMesh.vert3.z = float.Parse(line.Substring(34, 14)); // z1
+                            }
+                            catch
+                            {
+                                processError = true;
+                                break;
+                            }
+
                             //----------------------------------------------------------------------
                             line = txtReader.ReadLine().Trim().Replace(" ", ""); // EndLoop
                             //----------------------------------------------------------------------
