@@ -70,10 +70,20 @@ namespace STL_Tools
 
             for (i = 0; i < meshArray.Length; i++)
             {
-                /* vertex 1 */
-                normals.Add(meshArray[i].normal.x);
-                normals.Add(meshArray[i].normal.y);
-                normals.Add(meshArray[i].normal.z);
+                /* normal 1 */
+                normals.Add(meshArray[i].normal1.x);
+                normals.Add(meshArray[i].normal1.y);
+                normals.Add(meshArray[i].normal1.z);
+
+                /* normal 2 */
+                normals.Add(meshArray[i].normal2.x);
+                normals.Add(meshArray[i].normal2.y);
+                normals.Add(meshArray[i].normal2.z);
+
+                /* normal 3 */
+                normals.Add(meshArray[i].normal3.x);
+                normals.Add(meshArray[i].normal3.y);
+                normals.Add(meshArray[i].normal3.z);
             }
 
             return normals.ToArray();

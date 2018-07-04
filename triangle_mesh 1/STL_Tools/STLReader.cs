@@ -147,12 +147,16 @@ namespace STL_Tools
                     TriangleMesh newMesh = new TriangleMesh();
 
                     /* face normal */
-                    newMesh.normal.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex+1], fileBytes[byteIndex+2], fileBytes[byteIndex+3] }, 0);
+                    newMesh.normal1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex+1], fileBytes[byteIndex+2], fileBytes[byteIndex+3] }, 0);
                     byteIndex += 4;
-                    newMesh.normal.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    newMesh.normal1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
                     byteIndex += 4;
-                    newMesh.normal.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    newMesh.normal1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
                     byteIndex += 4;
+
+                    /* normals of vertex 2 and 3 equals to vertex 1's normals */
+                    newMesh.normal2 = newMesh.normal1;
+                    newMesh.normal3 = newMesh.normal1;
 
                     /* vertex 1 */
                     newMesh.vert1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
@@ -227,9 +231,13 @@ namespace STL_Tools
                             TriangleMesh newMesh = new TriangleMesh(); // define new mesh object
 
                             // FaceNormal 
-                            newMesh.normal.x = float.Parse(line.Substring(11, 14));
-                            newMesh.normal.y = float.Parse(line.Substring(25, 14));
-                            newMesh.normal.z = float.Parse(line.Substring(39, 14));
+                            newMesh.normal1.x = float.Parse(line.Substring(11, 14));
+                            newMesh.normal1.y = float.Parse(line.Substring(25, 14));
+                            newMesh.normal1.z = float.Parse(line.Substring(39, 14));
+
+                            /* normals of vertex 2 and 3 equals to vertex 1's normals */
+                            newMesh.normal2 = newMesh.normal1;
+                            newMesh.normal3 = newMesh.normal1;
                         
                             //----------------------------------------------------------------------
                             line = txtReader.ReadLine().Trim().Replace(" ", ""); // OuterLoop
