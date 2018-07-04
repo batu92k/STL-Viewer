@@ -129,7 +129,7 @@ namespace STL_Tools
 
             byte[] temp = new byte[4];
 
-
+            /* 80 bytes title + 4 byte num of triangles + 50 bytes (1 of triangular mesh)  */
             if (fileBytes.Length > 120)
             {
 
