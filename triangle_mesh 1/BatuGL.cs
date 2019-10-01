@@ -346,11 +346,6 @@ namespace BatuGL
 
            Gl.glPushMatrix();
 
-           //Gl.glEnable(Gl.GL_BLEND);
-           //Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
-           //Gl.glEnable(Gl.GL_LINE_SMOOTH);
-           //Gl.glHint(Gl.GL_LINE_SMOOTH_HINT, Gl.GL_FASTEST);
-
            Gl.glScaled(0.2, 0.2, 0.2);
 
            //---------------------X-------------------------
