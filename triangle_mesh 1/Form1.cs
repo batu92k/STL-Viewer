@@ -72,14 +72,24 @@ namespace triangle_mesh_1
             Gl.glMateriali(Gl.GL_FRONT, Gl.GL_SHININESS, 10); // Parlaklık seviyesi ayarla ("1" değerinin yansıması iyi)
             Gl.glEnable(Gl.GL_NORMALIZE); // Işık geçişini yumuşatma 
             //-------------------------------------------
+      
+            Gl.glPushMatrix();
 
+            Gl.glRotatef(-90, 1, 0, 0);
+            Gl.glScaled(2, 2, 2);
             Gl.glRotatef(rotation, 0.7f, 1.0f, 0.2f);
-            rotation++;
-            rotation = rotation % 360;
+            modelVAO.Draw(); /* draw object */
+            Gl.glDisable(Gl.GL_LIGHTING);
+            Gl.glScaled(3, 3, 3);
+            glController.drawWCS(); /* draw work coordinate system */
+            Gl.glEnable(Gl.GL_LIGHTING);
 
-            modelVAO.Draw();
+            Gl.glPopMatrix();      
  
             monitor.SwapBuffers();
+
+            rotation++;
+            rotation = rotation % 360;
         }
 
 
