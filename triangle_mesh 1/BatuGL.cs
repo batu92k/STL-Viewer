@@ -117,6 +117,7 @@ namespace BatuGL
             Gl.glEnable(Gl.GL_DEPTH_TEST);
             Gl.glDepthFunc(Gl.GL_LEQUAL);
             Gl.glHint(Gl.GL_PERSPECTIVE_CORRECTION_HINT, Gl.GL_NICEST);
+            Glut.glutInit();
         }
 
         /**
