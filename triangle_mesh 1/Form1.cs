@@ -14,7 +14,9 @@ namespace triangle_mesh_1
     {
         bool monitorLoaded = false;
         Batu_GL.VAO_TRIANGLES modelVAO; // 3d model vertex array object
-        readonly Orbiter orb;
+        private Orbiter orb;
+        Vector3 minPos = new Vector3();
+        Vector3 maxPos = new Vector3();
 
         public Form1()
         {
@@ -42,7 +44,11 @@ namespace triangle_mesh_1
                 modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
                 modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
                 modelVAO.color = Color.Crimson;
-
+                minPos = stlReader.GetMinMeshPosition(meshArray);
+                maxPos = stlReader.GetMaxMeshPosition(meshArray);
+                orb.Reset_Orientation();
+                orb.Reset_Pan();
+                orb.Reset_Scale();
                 if (!stlReader.Get_Process_Error())
                 {
                     DrawTimer.Enabled = true;
@@ -126,8 +132,10 @@ namespace triangle_mesh_1
 
             Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
             if (modelVAO != null) ConfigureBasicLighting(modelVAO.color);
+            GL.Translate(-minPos.x, -minPos.y, -minPos.z);
+            GL.Translate(-(maxPos.x - minPos.x) / 2.0f, -(maxPos.y - minPos.y) / 2.0f, -(maxPos.z - minPos.z) / 2.0f);
             GL.Translate(orb.PanX, orb.PanY, 0);
-            GL.Scale(2 * orb.scaleVal, 2 * orb.scaleVal, 2 * orb.scaleVal);
+            GL.Scale(orb.scaleVal, orb.scaleVal, orb.scaleVal);
             GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
             if (modelVAO != null) modelVAO.Draw();
             GL_Monitor.SwapBuffers();
