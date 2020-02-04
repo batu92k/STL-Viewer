@@ -25,9 +25,7 @@ namespace STL_Tools
         {
             List<float> vertices = new List<float>();
 
-            int i = 0;
-
-            for (i = 0; i < meshArray.Length; i++)
+            for (int i = 0; i < meshArray.Length; i++)
             {
                 /* vertex 1 */
                 vertices.Add(meshArray[i].vert1.x);
@@ -43,7 +41,7 @@ namespace STL_Tools
                 vertices.Add(meshArray[i].vert3.z);
             }
 
-                return vertices.ToArray();
+            return vertices.ToArray();
         }
 
 
@@ -56,20 +54,16 @@ namespace STL_Tools
         {
             List<float> normals = new List<float>();
 
-            int i = 0;
-
-            for (i = 0; i < meshArray.Length; i++)
+            for (int i = 0; i < meshArray.Length; i++)
             {
                 /* normal 1 */
                 normals.Add(meshArray[i].normal1.x);
                 normals.Add(meshArray[i].normal1.y);
                 normals.Add(meshArray[i].normal1.z);
-
                 /* normal 2 */
                 normals.Add(meshArray[i].normal2.x);
                 normals.Add(meshArray[i].normal2.y);
                 normals.Add(meshArray[i].normal2.z);
-
                 /* normal 3 */
                 normals.Add(meshArray[i].normal3.x);
                 normals.Add(meshArray[i].normal3.y);

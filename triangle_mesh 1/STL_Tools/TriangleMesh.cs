@@ -33,8 +33,6 @@ namespace STL_Tools
             vert2 = new Vector3();
             vert3 = new Vector3();
         }
-
-
     }
 
 }

@@ -10,7 +10,6 @@
 
 namespace STL_Tools
 {
-
     public class Vector3
     {
         public float x;
@@ -28,6 +27,5 @@ namespace STL_Tools
             y = yVal;
             z = zVal;
         }
-
     }
 }
