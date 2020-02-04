@@ -6,6 +6,7 @@ using System.Threading;
 using STL_Tools;
 using OpenTK.Graphics.OpenGL;
 using BatuGL;
+using Mouse_Orbit;
 
 namespace triangle_mesh_1
 {
@@ -21,6 +22,7 @@ namespace triangle_mesh_1
         float[] lightPos = new float[] { 200f, 200f, -200.0f, 1.0f };
         float[] lightPos2 = new float[] { -200f, 200f, -200.0f, 1.0f };
         int rotation = 0; // model rotation for 3d demonstration
+        Orbiter orb;
 
         public Form1()
         {
@@ -28,6 +30,11 @@ namespace triangle_mesh_1
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             InitializeComponent();
+            orb = new Orbiter();
+            GL_Monitor.MouseDown += orb.Control_MouseDownEvent;
+            GL_Monitor.MouseUp += orb.Control_MouseUpEvent;
+            GL_Monitor.MouseWheel += orb.Control_MouseWheelEvent;
+            GL_Monitor.KeyPress += orb.Control_KeyPress_Event;
         }
 
         private void FileSelectBt_Click(object sender, EventArgs e)
@@ -63,6 +70,7 @@ namespace triangle_mesh_1
 
         private void DrawTimer_Tick(object sender, EventArgs e)
         {
+            orb.UpdateOrbiter(MousePosition.X, MousePosition.Y);
             GL_Monitor.Invalidate();
         }
 
@@ -107,12 +115,10 @@ namespace triangle_mesh_1
 
             Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
             ConfigureBasicLighthing();
-            GL.Rotate(-90, 1, 0, 0);
-            GL.Scale(2, 2, 2);
-            GL.Rotate(rotation, 0.7f, 1.0f, 0.2f);
-
+            GL.Translate(orb.PanX, orb.PanY, 0);
+            GL.Scale(orb.scaleVal, orb.scaleVal, orb.scaleVal);
+            GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
             if(modelVAO != null) modelVAO.Draw();
-
             GL_Monitor.SwapBuffers();
 
             rotation++;
