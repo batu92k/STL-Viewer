@@ -40,11 +40,8 @@ namespace triangle_mesh_1
                 STLReader stlReader = new STLReader(stldosyaSec.FileName);
                 TriangleMesh[] meshArray = stlReader.ReadFile();
                 modelVAO = new Batu_GL.VAO_TRIANGLES();
-
-                STLExport stlExporter = new STLExport();
-
-                modelVAO.parameterArray = stlExporter.Get_Mesh_Vertices(meshArray);
-                modelVAO.normalArray = stlExporter.Get_Mesh_Normals(meshArray);
+                modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
+                modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
                 modelVAO.color = Color.CadetBlue;
 
                 if (!stlReader.Get_Process_Error())

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 namespace STL_Tools
 {
 
-    public class STLExport
+    public static class STLExport
     {
 
         /**
@@ -21,7 +21,7 @@ namespace STL_Tools
         * @param  meshArray
         * @retval vertices
         */
-        public float[] Get_Mesh_Vertices(TriangleMesh[] meshArray)
+        public static float[] Get_Mesh_Vertices(TriangleMesh[] meshArray)
         {
             List<float> vertices = new List<float>();
 
@@ -52,7 +52,7 @@ namespace STL_Tools
         * @param  meshArray
         * @retval normals
         */
-        public float[] Get_Mesh_Normals(TriangleMesh[] meshArray)
+        public static float[] Get_Mesh_Normals(TriangleMesh[] meshArray)
         {
             List<float> normals = new List<float>();
 
