@@ -85,9 +85,9 @@ namespace triangle_mesh_1
         private void ConfigureBasicLighting(Color modelColor)
         {
             float[] light_1 = new float[] {
-            0.3f * modelColor.R / 255.0f,
-            0.3f * modelColor.G / 255.0f,
-            0.3f * modelColor.B / 255.0f,
+            0.2f * modelColor.R / 255.0f,
+            0.2f * modelColor.G / 255.0f,
+            0.2f * modelColor.B / 255.0f,
             1.0f };
             float[] light_2 = new float[] {
             3.0f * modelColor.R / 255.0f,
