@@ -102,5 +102,4 @@ C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mes
 C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csproj.GenerateResource.Cache
 C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.pdb
 C:\Users\arge\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csprojResolveAssemblyReference.cache
-C:\Users\b92k\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csprojAssemblyReference.cache
 C:\Users\b92k\Documents\GitHub\STL-Viewer\triangle_mesh 1\obj\Debug\triangle_mesh 1.csproj.CopyComplete

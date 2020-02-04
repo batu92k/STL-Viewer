@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Tao.OpenGl;
 using System.Globalization;
 using System.Threading;
 using STL_Tools;
+using OpenTK.Graphics.OpenGL;
 using BatuGL;
 
 namespace triangle_mesh_1
 {
     public partial class Form1 : Form
     {
-        Batu_GL glController; // GL controller class instance
+        bool monitorLoaded = false;
         Batu_GL.VAO_TRIANGLES modelVAO; // 3d model vertex array object
 
         float[] light_1 = new float[] { 0.15f, 0.15f, 0.15f, 1.0f };
@@ -20,7 +20,6 @@ namespace triangle_mesh_1
         float[] specular = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
         float[] lightPos = new float[] { 200f, 200f, -200.0f, 1.0f };
         float[] lightPos2 = new float[] { -200f, 200f, -200.0f, 1.0f };
-
         int rotation = 0; // model rotation for 3d demonstration
 
         public Form1()
@@ -28,61 +27,8 @@ namespace triangle_mesh_1
             /* dot/comma selection for floating point numbers */
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-
             InitializeComponent();
-
-            glController = new Batu_GL();
-            glController.initialize(monitor);
-            glController.glInit(monitor, Batu_GL.Ortho_Mode.CENTER);
-
         }
-
-        public void Draw()
-        {
-            glController.glDinamik(monitor, Batu_GL.Ortho_Mode.CENTER);
-            //--------------------------------------------
-            Gl.glEnable(Gl.GL_LIGHTING);  // Işıklandırma aktif ediliyor  
-            //--------------------------------------------
-            //--Işık 1                               
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, light_1); // Aydınlatma çeşidi ve ışık numarası belirleniyor ışık özellikleri "isik adlı diziden alınıyor"
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, light_2); // Aydınlatma çeşitlerinden dağıtma seçilerek "isik2" de dağılmayı yapacak ışık özellikleri tanımlanıyor
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_SPECULAR, specular); // Aydınlatma çeşitlerinden yansıtma seçiliyor "specular" dizisi ile yansıma ışığının özellikleri belirleniyor
-            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, lightPos); // "0" numaralı ışığın konumu "lightpos" dizisinden alınıyor
-            Gl.glEnable(Gl.GL_LIGHT0); // "0" numaralı ıuşık aktif hale gtiriliyor
-            //-------------------------------------------
-            //--Işık 2
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, light_1); 
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_DIFFUSE, light_2);
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_SPECULAR, specular);
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPos2);
-            Gl.glEnable(Gl.GL_LIGHT1);
-            //-------------------------------------------
-            Gl.glEnable(Gl.GL_COLOR_MATERIAL); // Parça renk materyali aktif hale getiriliyor
-            Gl.glColorMaterial(Gl.GL_FRONT, Gl.GL_AMBIENT_AND_DIFFUSE);
-            Gl.glMaterialfv(Gl.GL_FRONT, Gl.GL_SPECULAR, specref);
-            Gl.glMateriali(Gl.GL_FRONT, Gl.GL_SHININESS, 10); // Parlaklık seviyesi ayarla ("1" değerinin yansıması iyi)
-            Gl.glEnable(Gl.GL_NORMALIZE); // Işık geçişini yumuşatma 
-            //-------------------------------------------
-      
-            Gl.glPushMatrix();
-
-            Gl.glRotatef(-90, 1, 0, 0);
-            Gl.glScaled(2, 2, 2);
-            Gl.glRotatef(rotation, 0.7f, 1.0f, 0.2f);
-            modelVAO.Draw(); /* draw object */
-            Gl.glDisable(Gl.GL_LIGHTING);
-            Gl.glScaled(3, 3, 3);
-            glController.drawWCS(); /* draw work coordinate system */
-            Gl.glEnable(Gl.GL_LIGHTING);
-
-            Gl.glPopMatrix();      
- 
-            monitor.SwapBuffers();
-
-            rotation++;
-            rotation = rotation % 360;
-        }
-
 
         private void fileSelectBt_Click(object sender, EventArgs e)
         {
@@ -115,30 +61,69 @@ namespace triangle_mesh_1
                     fileSelectBt.BackColor = Color.Tomato;
 
                     /* if there is an error, deinitialize the gl monitor to clear the screen */
-                    glController.glInit(monitor, Batu_GL.Ortho_Mode.CENTER);
-                    monitor.SwapBuffers();
+                    Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
+                    GL_Monitor.SwapBuffers();
                 }
 
-            }
-            else
-            {
-                // intentionally left blank
             }
         }
 
         private void drawTimer_Tick(object sender, EventArgs e)
         {
-            Draw();
+            GL_Monitor.Invalidate();
         }
 
+        private void GL_Monitor_Load(object sender, EventArgs e)
+        {
+            monitorLoaded = true;
+            GL.ClearColor(Color.Black);
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
+        }
 
-        
+        private void GL_Monitor_Paint(object sender, PaintEventArgs e)
+        {
+            if (!monitorLoaded)
+                return;
 
-        
-     
+            Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
+            //--------------------------------------------
+            GL.Enable(EnableCap.Lighting);
+            //--------------------------------------------
+            //--Işık 1   
+            GL.Light(LightName.Light0, LightParameter.Ambient, light_1);
+            GL.Light(LightName.Light0, LightParameter.Diffuse, light_2);
+            GL.Light(LightName.Light0, LightParameter.Specular, specular);
+            GL.Light(LightName.Light0, LightParameter.Position, lightPos);
+            GL.Enable(EnableCap.Light0);
+            //-------------------------------------------
+            //--Işık 2
+            GL.Light(LightName.Light1, LightParameter.Ambient, light_1);
+            GL.Light(LightName.Light1, LightParameter.Diffuse, light_2);
+            GL.Light(LightName.Light1, LightParameter.Specular, specular);
+            GL.Light(LightName.Light1, LightParameter.Position, lightPos2);
+            GL.Enable(EnableCap.Light1);
+            //-------------------------------------------
+            GL.Enable(EnableCap.ColorMaterial);
+            GL.ColorMaterial(MaterialFace.Front, ColorMaterialParameter.AmbientAndDiffuse);
+            GL.Material(MaterialFace.Front, MaterialParameter.Specular, specref);
+            GL.Material(MaterialFace.Front, MaterialParameter.Shininess, 10);
+            GL.Enable(EnableCap.Normalize);
+            //-------------------------------------------
 
+            GL.Rotate(-90, 1, 0, 0);
+            GL.Scale(2, 2, 2);
+            GL.Rotate(rotation, 0.7f, 1.0f, 0.2f);
 
+            if(modelVAO != null) modelVAO.Draw();
 
+            GL_Monitor.SwapBuffers();
+
+            rotation++;
+            rotation = rotation % 360;
+        }
     }
 }
