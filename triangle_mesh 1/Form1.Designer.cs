@@ -30,36 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             this.fileSelectBt = new System.Windows.Forms.Button();
-            this.dosyaSecTxb = new System.Windows.Forms.TextBox();
             this.drawTimer = new System.Windows.Forms.Timer(this.components);
             this.GL_Monitor = new OpenTK.GLControl();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // fileSelectBt
             // 
-            this.fileSelectBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.fileSelectBt.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.fileSelectBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.fileSelectBt.Location = new System.Drawing.Point(16, 613);
+            this.fileSelectBt.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fileSelectBt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.fileSelectBt.Location = new System.Drawing.Point(0, 628);
             this.fileSelectBt.Margin = new System.Windows.Forms.Padding(4);
             this.fileSelectBt.Name = "fileSelectBt";
-            this.fileSelectBt.Size = new System.Drawing.Size(153, 44);
+            this.fileSelectBt.Size = new System.Drawing.Size(1045, 44);
             this.fileSelectBt.TabIndex = 13;
-            this.fileSelectBt.Text = "Select Stl File";
+            this.fileSelectBt.Text = "Select STL File";
             this.fileSelectBt.UseVisualStyleBackColor = false;
             this.fileSelectBt.Click += new System.EventHandler(this.fileSelectBt_Click);
-            // 
-            // dosyaSecTxb
-            // 
-            this.dosyaSecTxb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dosyaSecTxb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dosyaSecTxb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.dosyaSecTxb.Location = new System.Drawing.Point(177, 613);
-            this.dosyaSecTxb.Margin = new System.Windows.Forms.Padding(4);
-            this.dosyaSecTxb.Multiline = true;
-            this.dosyaSecTxb.Name = "dosyaSecTxb";
-            this.dosyaSecTxb.Size = new System.Drawing.Size(214, 44);
-            this.dosyaSecTxb.TabIndex = 14;
             // 
             // drawTimer
             // 
@@ -68,14 +56,12 @@
             // 
             // GL_Monitor
             // 
-            this.GL_Monitor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.GL_Monitor.BackColor = System.Drawing.Color.Black;
-            this.GL_Monitor.Location = new System.Drawing.Point(13, 13);
+            this.GL_Monitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GL_Monitor.Location = new System.Drawing.Point(0, 0);
             this.GL_Monitor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GL_Monitor.Name = "GL_Monitor";
-            this.GL_Monitor.Size = new System.Drawing.Size(1019, 592);
+            this.GL_Monitor.Size = new System.Drawing.Size(1045, 628);
             this.GL_Monitor.TabIndex = 15;
             this.GL_Monitor.VSync = false;
             this.GL_Monitor.Load += new System.EventHandler(this.GL_Monitor_Load);
@@ -87,7 +73,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 672);
             this.Controls.Add(this.GL_Monitor);
-            this.Controls.Add(this.dosyaSecTxb);
             this.Controls.Add(this.fileSelectBt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -96,15 +81,14 @@
             this.Text = "STL Viewer";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button fileSelectBt;
-        private System.Windows.Forms.TextBox dosyaSecTxb;
         private System.Windows.Forms.Timer drawTimer;
         private OpenTK.GLControl GL_Monitor;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

@@ -37,8 +37,6 @@ namespace triangle_mesh_1
 
             if (stldosyaSec.ShowDialog() == DialogResult.OK)
             {
-                dosyaSecTxb.Text = stldosyaSec.SafeFileName;
-
                 STLReader stlReader = new STLReader(stldosyaSec.FileName);
                 TriangleMesh[] meshArray = stlReader.ReadFile();
                 modelVAO = new Batu_GL.VAO_TRIANGLES();
