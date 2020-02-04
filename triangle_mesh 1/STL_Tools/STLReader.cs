@@ -75,6 +75,55 @@ namespace STL_Tools
             return meshList;
         }
 
+        /**
+        * @brief  This function returns the min position of objects bounding box by checking
+        *         all triangle meshes
+        * @param  meshArray
+        * @retval Vector3
+        */
+        public Vector3 GetMinMeshPosition(TriangleMesh[] meshArray)
+        {
+            Vector3 minVec = new Vector3();
+            float[] minRefArray = new float[3];
+            minRefArray[0] = meshArray.Min(j => j.vert1.x);
+            minRefArray[1] = meshArray.Min(j => j.vert2.x);
+            minRefArray[2] = meshArray.Min(j => j.vert3.x);
+            minVec.x = minRefArray.Min();
+            minRefArray[0] = meshArray.Min(j => j.vert1.y);
+            minRefArray[1] = meshArray.Min(j => j.vert2.y);
+            minRefArray[2] = meshArray.Min(j => j.vert3.y);
+            minVec.y = minRefArray.Min();
+            minRefArray[0] = meshArray.Min(j => j.vert1.z);
+            minRefArray[1] = meshArray.Min(j => j.vert2.z);
+            minRefArray[2] = meshArray.Min(j => j.vert3.z);
+            minVec.z = minRefArray.Min();
+            return minVec;
+        }
+
+        /**
+        * @brief  This function returns the max position of objects bounding box by checking
+        *         all triangle meshes
+        * @param  meshArray
+        * @retval Vector3
+        */
+        public Vector3 GetMaxMeshPosition(TriangleMesh[] meshArray)
+        {
+            Vector3 maxVec = new Vector3();
+            float[] maxRefArray = new float[3];
+            maxRefArray[0] = meshArray.Max(j => j.vert1.x);
+            maxRefArray[1] = meshArray.Max(j => j.vert2.x);
+            maxRefArray[2] = meshArray.Max(j => j.vert3.x);
+            maxVec.x = maxRefArray.Max();
+            maxRefArray[0] = meshArray.Max(j => j.vert1.y);
+            maxRefArray[1] = meshArray.Max(j => j.vert2.y);
+            maxRefArray[2] = meshArray.Max(j => j.vert3.y);
+            maxVec.y = maxRefArray.Max();
+            maxRefArray[0] = meshArray.Max(j => j.vert1.z);
+            maxRefArray[1] = meshArray.Max(j => j.vert2.z);
+            maxRefArray[2] = meshArray.Max(j => j.vert3.z);
+            maxVec.z = maxRefArray.Max();
+            return maxVec;
+        }
 
         /**
         * @brief  This function checks the type of stl file binary or ascii, function is assuming
