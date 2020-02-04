@@ -47,20 +47,13 @@ namespace BatuGL
             GL.Hint(HintTarget.PolygonSmoothHint, HintMode.Nicest);
         }
 
-
-        /* Daha sonra poligon triangle gibi GL elemanlarini da karsilayacak sekilde gelistirilecek */
         public class VAO_TRIANGLES
         {
-            public Color color { get; set; } // VAO dizisi rengi
+            public Color color { get; set; }
             public float[] scale { get; set; }
-            public float[] parameterArray { get; set; } // VAO koordinat parametreleri
-            public float[] normalArray { get; set; } // VAO koordinat parametreleri
+            public float[] parameterArray { get; set; }
+            public float[] normalArray { get; set; }
 
-            /**
-            * @brief  sinif constructor fonksiyonu 
-            * @param  none  	
-            * @retval none
-            */
             public VAO_TRIANGLES()
             {
                 color = Color.Red;
@@ -81,9 +74,6 @@ namespace BatuGL
                 GL.DisableClientState(ArrayCap.VertexArray);
                 GL.PopMatrix();
             }
-
         }
-
-
     }
 }
