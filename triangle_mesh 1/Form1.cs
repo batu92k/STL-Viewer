@@ -14,15 +14,7 @@ namespace triangle_mesh_1
     {
         bool monitorLoaded = false;
         Batu_GL.VAO_TRIANGLES modelVAO; // 3d model vertex array object
-
-        float[] light_1 = new float[] { 0.15f, 0.15f, 0.15f, 1.0f };
-        float[] light_2 = new float[] { 0.35f, 0.35f, 0.35f, 1.0f };
-        float[] specref = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-        float[] specular = new float[] { 1.0f, 1.0f, 1.0f, 1.0f };
-        float[] lightPos = new float[] { 200f, 200f, -200.0f, 1.0f };
-        float[] lightPos2 = new float[] { -200f, 200f, -200.0f, 1.0f };
-        int rotation = 0; // model rotation for 3d demonstration
-        Orbiter orb;
+        readonly Orbiter orb;
 
         public Form1()
         {
@@ -49,11 +41,10 @@ namespace triangle_mesh_1
                 modelVAO = new Batu_GL.VAO_TRIANGLES();
                 modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
                 modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
-                modelVAO.color = Color.CadetBlue;
+                modelVAO.color = Color.Crimson;
 
                 if (!stlReader.Get_Process_Error())
                 {
-                    rotation = 0;
                     DrawTimer.Enabled = true;
                     FileSelectBt.BackColor = Color.DeepSkyBlue;
                 }
@@ -85,20 +76,40 @@ namespace triangle_mesh_1
             Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
         }
 
-        private void ConfigureBasicLighthing()
+        private void ConfigureBasicLighting(Color modelColor)
         {
+            float[] light_1 = new float[] {
+            0.3f * modelColor.R / 255.0f,
+            0.3f * modelColor.G / 255.0f,
+            0.3f * modelColor.B / 255.0f,
+            1.0f };
+            float[] light_2 = new float[] {
+            3.0f * modelColor.R / 255.0f,
+            3.0f * modelColor.G / 255.0f,
+            3.0f * modelColor.B / 255.0f,
+            1.0f };
+            float[] specref = new float[] { 
+                0.01f * modelColor.R / 255.0f, 
+                0.01f * modelColor.G / 255.0f, 
+                0.01f * modelColor.B / 255.0f, 
+                1.0f };
+            float[] specular_0 = new float[] { -1.0f, -1.0f, 1.0f, 1.0f };
+            float[] specular_1 = new float[] { 1.0f, -1.0f, 1.0f, 1.0f };
+            float[] lightPos_0 = new float[] { 1000f, 1000f, -200.0f, 1.0f };
+            float[] lightPos_1 = new float[] { -1000f, 1000f, -200.0f, 1.0f };
+
             GL.Enable(EnableCap.Lighting);
             /* light 0 */
             GL.Light(LightName.Light0, LightParameter.Ambient, light_1);
             GL.Light(LightName.Light0, LightParameter.Diffuse, light_2);
-            GL.Light(LightName.Light0, LightParameter.Specular, specular);
-            GL.Light(LightName.Light0, LightParameter.Position, lightPos);
+            GL.Light(LightName.Light0, LightParameter.Specular, specular_0);
+            GL.Light(LightName.Light0, LightParameter.Position, lightPos_0);
             GL.Enable(EnableCap.Light0);
             /* light 1 */
             GL.Light(LightName.Light1, LightParameter.Ambient, light_1);
             GL.Light(LightName.Light1, LightParameter.Diffuse, light_2);
-            GL.Light(LightName.Light1, LightParameter.Specular, specular);
-            GL.Light(LightName.Light1, LightParameter.Position, lightPos2);
+            GL.Light(LightName.Light1, LightParameter.Specular, specular_1);
+            GL.Light(LightName.Light1, LightParameter.Position, lightPos_1);
             GL.Enable(EnableCap.Light1);
             /*material settings  */
             GL.Enable(EnableCap.ColorMaterial);
@@ -114,15 +125,12 @@ namespace triangle_mesh_1
                 return;
 
             Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
-            ConfigureBasicLighthing();
+            if (modelVAO != null) ConfigureBasicLighting(modelVAO.color);
             GL.Translate(orb.PanX, orb.PanY, 0);
-            GL.Scale(orb.scaleVal, orb.scaleVal, orb.scaleVal);
+            GL.Scale(2 * orb.scaleVal, 2 * orb.scaleVal, 2 * orb.scaleVal);
             GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
-            if(modelVAO != null) modelVAO.Draw();
+            if (modelVAO != null) modelVAO.Draw();
             GL_Monitor.SwapBuffers();
-
-            rotation++;
-            rotation = rotation % 360;
         }
     }
 }
