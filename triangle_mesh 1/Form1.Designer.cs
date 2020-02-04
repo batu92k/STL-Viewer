@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.fileSelectBt = new System.Windows.Forms.Button();
-            this.drawTimer = new System.Windows.Forms.Timer(this.components);
+            this.FileSelectBt = new System.Windows.Forms.Button();
+            this.DrawTimer = new System.Windows.Forms.Timer(this.components);
             this.GL_Monitor = new OpenTK.GLControl();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
-            // fileSelectBt
+            // FileSelectBt
             // 
-            this.fileSelectBt.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.fileSelectBt.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.fileSelectBt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.fileSelectBt.Location = new System.Drawing.Point(0, 628);
-            this.fileSelectBt.Margin = new System.Windows.Forms.Padding(4);
-            this.fileSelectBt.Name = "fileSelectBt";
-            this.fileSelectBt.Size = new System.Drawing.Size(1045, 44);
-            this.fileSelectBt.TabIndex = 13;
-            this.fileSelectBt.Text = "Select STL File";
-            this.fileSelectBt.UseVisualStyleBackColor = false;
-            this.fileSelectBt.Click += new System.EventHandler(this.fileSelectBt_Click);
+            this.FileSelectBt.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.FileSelectBt.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.FileSelectBt.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.FileSelectBt.Location = new System.Drawing.Point(0, 628);
+            this.FileSelectBt.Margin = new System.Windows.Forms.Padding(4);
+            this.FileSelectBt.Name = "FileSelectBt";
+            this.FileSelectBt.Size = new System.Drawing.Size(1045, 44);
+            this.FileSelectBt.TabIndex = 13;
+            this.FileSelectBt.Text = "Select STL File";
+            this.FileSelectBt.UseVisualStyleBackColor = false;
+            this.FileSelectBt.Click += new System.EventHandler(this.FileSelectBt_Click);
             // 
-            // drawTimer
+            // DrawTimer
             // 
-            this.drawTimer.Interval = 25;
-            this.drawTimer.Tick += new System.EventHandler(this.drawTimer_Tick);
+            this.DrawTimer.Interval = 25;
+            this.DrawTimer.Tick += new System.EventHandler(this.DrawTimer_Tick);
             // 
             // GL_Monitor
             // 
@@ -73,7 +73,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 672);
             this.Controls.Add(this.GL_Monitor);
-            this.Controls.Add(this.fileSelectBt);
+            this.Controls.Add(this.FileSelectBt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
@@ -85,8 +85,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button fileSelectBt;
-        private System.Windows.Forms.Timer drawTimer;
+        private System.Windows.Forms.Button FileSelectBt;
+        private System.Windows.Forms.Timer DrawTimer;
         private OpenTK.GLControl GL_Monitor;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }

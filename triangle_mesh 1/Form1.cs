@@ -30,7 +30,7 @@ namespace triangle_mesh_1
             InitializeComponent();
         }
 
-        private void fileSelectBt_Click(object sender, EventArgs e)
+        private void FileSelectBt_Click(object sender, EventArgs e)
         {
             OpenFileDialog stldosyaSec = new OpenFileDialog();
             stldosyaSec.Filter = "STL Files|*.stl;*.txt;";
@@ -47,23 +47,21 @@ namespace triangle_mesh_1
                 if (!stlReader.Get_Process_Error())
                 {
                     rotation = 0;
-                    drawTimer.Enabled = true;
-                    fileSelectBt.BackColor = Color.DeepSkyBlue;
+                    DrawTimer.Enabled = true;
+                    FileSelectBt.BackColor = Color.DeepSkyBlue;
                 }
                 else
                 {
-                    drawTimer.Enabled = false;
-                    fileSelectBt.BackColor = Color.Tomato;
-
+                    DrawTimer.Enabled = false;
+                    FileSelectBt.BackColor = Color.Tomato;
                     /* if there is an error, deinitialize the gl monitor to clear the screen */
                     Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
                     GL_Monitor.SwapBuffers();
                 }
-
             }
         }
 
-        private void drawTimer_Tick(object sender, EventArgs e)
+        private void DrawTimer_Tick(object sender, EventArgs e)
         {
             GL_Monitor.Invalidate();
         }
