@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.FileSelectBt = new System.Windows.Forms.Button();
             this.DrawTimer = new System.Windows.Forms.Timer(this.components);
             this.GL_Monitor = new OpenTK.GLControl();
@@ -75,6 +76,7 @@
             this.Controls.Add(this.GL_Monitor);
             this.Controls.Add(this.FileSelectBt);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
