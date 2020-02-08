@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+  ******************************************************************************
+  * @file    AppMainForm.cs
+  * @author  Ali Batuhan KINDAN
+  * @date    21.09.2016
+  * @brief   This file contains the implementaion of main application form functionality
+  ******************************************************************************
+  */
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
