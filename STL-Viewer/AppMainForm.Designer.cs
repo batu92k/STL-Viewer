@@ -1,6 +1,6 @@
-﻿namespace triangle_mesh_1
+﻿namespace STLViewer
 {
-    partial class Form1
+    partial class AppMainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppMainForm));
             this.FileSelectBt = new System.Windows.Forms.Button();
             this.DrawTimer = new System.Windows.Forms.Timer(this.components);
             this.GL_Monitor = new OpenTK.GLControl();

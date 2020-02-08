@@ -8,9 +8,9 @@ using OpenTK.Graphics.OpenGL;
 using BatuGL;
 using Mouse_Orbit;
 
-namespace triangle_mesh_1
+namespace STLViewer
 {
-    public partial class Form1 : Form
+    public partial class AppMainForm : Form
     {
         bool monitorLoaded = false;
         Batu_GL.VAO_TRIANGLES modelVAO; // 3d model vertex array object
@@ -18,7 +18,7 @@ namespace triangle_mesh_1
         Vector3 minPos = new Vector3();
         Vector3 maxPos = new Vector3();
 
-        public Form1()
+        public AppMainForm()
         {
             /* dot/comma selection for floating point numbers */
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");

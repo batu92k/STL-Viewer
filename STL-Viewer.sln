@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "triangle_mesh 1", "triangle_mesh 1\triangle_mesh 1.csproj", "{50493E1F-6012-49DC-ABA7-0DF6F019E79F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STL-Viewer", "STL-Viewer\STL-Viewer.csproj", "{50493E1F-6012-49DC-ABA7-0DF6F019E79F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {367D125D-89C4-4262-A13E-439E11798D81}
 	EndGlobalSection
 EndGlobal
