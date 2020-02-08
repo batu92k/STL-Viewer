@@ -33,7 +33,6 @@
             this.FileSelectBt = new System.Windows.Forms.Button();
             this.DrawTimer = new System.Windows.Forms.Timer(this.components);
             this.GL_Monitor = new OpenTK.GLControl();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // FileSelectBt
@@ -68,7 +67,7 @@
             this.GL_Monitor.Load += new System.EventHandler(this.GL_Monitor_Load);
             this.GL_Monitor.Paint += new System.Windows.Forms.PaintEventHandler(this.GL_Monitor_Paint);
             // 
-            // Form1
+            // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,7 +77,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "AppMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STL Viewer";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -90,7 +89,6 @@
         private System.Windows.Forms.Button FileSelectBt;
         private System.Windows.Forms.Timer DrawTimer;
         private OpenTK.GLControl GL_Monitor;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
