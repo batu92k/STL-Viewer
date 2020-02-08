@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("triangle_mesh 1")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("STL-Viewer")]
+[assembly: AssemblyDescription("Viewer Tool for ASCII and Binary Formatted STL Files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("triangle_mesh 1")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("batu92k")]
+[assembly: AssemblyProduct("STL-Viewer")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
