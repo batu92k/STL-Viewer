@@ -39,6 +39,7 @@
             this.CloseBt = new System.Windows.Forms.Button();
             this.MinimizeBt = new System.Windows.Forms.Button();
             this.AppTitleSymbolPicBx = new System.Windows.Forms.PictureBox();
+            this.MaximizeBt = new System.Windows.Forms.Button();
             this.AppToolBarMStp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AppTitleSymbolPicBx)).BeginInit();
             this.SuspendLayout();
@@ -131,7 +132,7 @@
             this.MinimizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MinimizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.MinimizeBt.ForeColor = System.Drawing.Color.Black;
-            this.MinimizeBt.Location = new System.Drawing.Point(959, 0);
+            this.MinimizeBt.Location = new System.Drawing.Point(913, 0);
             this.MinimizeBt.Name = "MinimizeBt";
             this.MinimizeBt.Size = new System.Drawing.Size(40, 40);
             this.MinimizeBt.TabIndex = 19;
@@ -151,11 +152,28 @@
             this.AppTitleSymbolPicBx.TabIndex = 20;
             this.AppTitleSymbolPicBx.TabStop = false;
             // 
+            // MaximizeBt
+            // 
+            this.MaximizeBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MaximizeBt.BackColor = System.Drawing.Color.Firebrick;
+            this.MaximizeBt.FlatAppearance.BorderSize = 0;
+            this.MaximizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MaximizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.MaximizeBt.ForeColor = System.Drawing.Color.Black;
+            this.MaximizeBt.Location = new System.Drawing.Point(959, 0);
+            this.MaximizeBt.Name = "MaximizeBt";
+            this.MaximizeBt.Size = new System.Drawing.Size(40, 40);
+            this.MaximizeBt.TabIndex = 21;
+            this.MaximizeBt.Text = "▭";
+            this.MaximizeBt.UseVisualStyleBackColor = false;
+            this.MaximizeBt.Click += new System.EventHandler(this.MaximizeBt_Click);
+            // 
             // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 672);
+            this.Controls.Add(this.MaximizeBt);
             this.Controls.Add(this.AppTitleSymbolPicBx);
             this.Controls.Add(this.MinimizeBt);
             this.Controls.Add(this.CloseBt);
@@ -186,6 +204,7 @@
         private System.Windows.Forms.Button CloseBt;
         private System.Windows.Forms.Button MinimizeBt;
         private System.Windows.Forms.PictureBox AppTitleSymbolPicBx;
+        private System.Windows.Forms.Button MaximizeBt;
     }
 }
 

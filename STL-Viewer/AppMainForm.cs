@@ -189,5 +189,11 @@ namespace STLViewer
             if (this.WindowState == FormWindowState.Maximized) this.WindowState = FormWindowState.Normal;
             else this.WindowState = FormWindowState.Maximized;
         }
+
+        private void MaximizeBt_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized) this.WindowState = FormWindowState.Normal;
+            else this.WindowState = FormWindowState.Maximized;
+        }
     }
 }
