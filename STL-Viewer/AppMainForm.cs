@@ -230,5 +230,15 @@ namespace STLViewer
                 }
             }                
         }
+
+        private void HelpMenuHowToUseBt_Click(object sender, EventArgs e)
+        {
+            // will be implemented
+        }
+
+        private void HelpMenuAboutBt_Click(object sender, EventArgs e)
+        {
+            // will be implemented
+        }
     }
 }

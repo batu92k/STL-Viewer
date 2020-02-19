@@ -40,6 +40,9 @@
             this.MinimizeBt = new System.Windows.Forms.Button();
             this.AppTitleSymbolPicBx = new System.Windows.Forms.PictureBox();
             this.MaximizeBt = new System.Windows.Forms.Button();
+            this.ToolBarHelpMenuBt = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenuHowToUseBt = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenuAboutBt = new System.Windows.Forms.ToolStripMenuItem();
             this.AppToolBarMStp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AppTitleSymbolPicBx)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +75,8 @@
             this.AppToolBarMStp.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.AppToolBarMStp.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.AppToolBarMStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolBarFileMenuBt});
+            this.ToolBarFileMenuBt,
+            this.ToolBarHelpMenuBt});
             this.AppToolBarMStp.Location = new System.Drawing.Point(0, 0);
             this.AppToolBarMStp.Name = "AppToolBarMStp";
             this.AppToolBarMStp.Size = new System.Drawing.Size(1045, 40);
@@ -170,6 +174,32 @@
             this.MaximizeBt.UseVisualStyleBackColor = false;
             this.MaximizeBt.Click += new System.EventHandler(this.MaximizeBt_Click);
             // 
+            // ToolBarHelpMenuBt
+            // 
+            this.ToolBarHelpMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HelpMenuHowToUseBt,
+            this.HelpMenuAboutBt});
+            this.ToolBarHelpMenuBt.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.ToolBarHelpMenuBt.Name = "ToolBarHelpMenuBt";
+            this.ToolBarHelpMenuBt.Size = new System.Drawing.Size(59, 36);
+            this.ToolBarHelpMenuBt.Text = "Help";
+            // 
+            // HelpMenuHowToUseBt
+            // 
+            this.HelpMenuHowToUseBt.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.HelpMenuHowToUseBt.Name = "HelpMenuHowToUseBt";
+            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(224, 28);
+            this.HelpMenuHowToUseBt.Text = "How to Use";
+            this.HelpMenuHowToUseBt.Click += new System.EventHandler(this.HelpMenuHowToUseBt_Click);
+            // 
+            // HelpMenuAboutBt
+            // 
+            this.HelpMenuAboutBt.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.HelpMenuAboutBt.Name = "HelpMenuAboutBt";
+            this.HelpMenuAboutBt.Size = new System.Drawing.Size(224, 28);
+            this.HelpMenuAboutBt.Text = "About";
+            this.HelpMenuAboutBt.Click += new System.EventHandler(this.HelpMenuAboutBt_Click);
+            // 
             // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -207,6 +237,9 @@
         private System.Windows.Forms.Button MinimizeBt;
         private System.Windows.Forms.PictureBox AppTitleSymbolPicBx;
         private System.Windows.Forms.Button MaximizeBt;
+        private System.Windows.Forms.ToolStripMenuItem ToolBarHelpMenuBt;
+        private System.Windows.Forms.ToolStripMenuItem HelpMenuHowToUseBt;
+        private System.Windows.Forms.ToolStripMenuItem HelpMenuAboutBt;
     }
 }
 
