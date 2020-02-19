@@ -36,13 +36,14 @@
             this.ToolBarFileMenuBt = new System.Windows.Forms.ToolStripMenuItem();
             this.FileMenuImportBt = new System.Windows.Forms.ToolStripMenuItem();
             this.FileMenuExitBt = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolBarHelpMenuBt = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenuHowToUseBt = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenuAboutBt = new System.Windows.Forms.ToolStripMenuItem();
             this.CloseBt = new System.Windows.Forms.Button();
             this.MinimizeBt = new System.Windows.Forms.Button();
             this.AppTitleSymbolPicBx = new System.Windows.Forms.PictureBox();
             this.MaximizeBt = new System.Windows.Forms.Button();
-            this.ToolBarHelpMenuBt = new System.Windows.Forms.ToolStripMenuItem();
-            this.HelpMenuHowToUseBt = new System.Windows.Forms.ToolStripMenuItem();
-            this.HelpMenuAboutBt = new System.Windows.Forms.ToolStripMenuItem();
+            this.AppTitleLb = new System.Windows.Forms.Label();
             this.AppToolBarMStp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AppTitleSymbolPicBx)).BeginInit();
             this.SuspendLayout();
@@ -102,7 +103,7 @@
             // 
             this.FileMenuImportBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.FileMenuImportBt.Name = "FileMenuImportBt";
-            this.FileMenuImportBt.Size = new System.Drawing.Size(224, 28);
+            this.FileMenuImportBt.Size = new System.Drawing.Size(146, 28);
             this.FileMenuImportBt.Text = "Import";
             this.FileMenuImportBt.Click += new System.EventHandler(this.FileMenuImportBt_Click);
             // 
@@ -110,9 +111,36 @@
             // 
             this.FileMenuExitBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.FileMenuExitBt.Name = "FileMenuExitBt";
-            this.FileMenuExitBt.Size = new System.Drawing.Size(224, 28);
+            this.FileMenuExitBt.Size = new System.Drawing.Size(146, 28);
             this.FileMenuExitBt.Text = "Exit";
             this.FileMenuExitBt.Click += new System.EventHandler(this.FileMenuExitBt_Click);
+            // 
+            // ToolBarHelpMenuBt
+            // 
+            this.ToolBarHelpMenuBt.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.ToolBarHelpMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HelpMenuHowToUseBt,
+            this.HelpMenuAboutBt});
+            this.ToolBarHelpMenuBt.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.ToolBarHelpMenuBt.Name = "ToolBarHelpMenuBt";
+            this.ToolBarHelpMenuBt.Size = new System.Drawing.Size(59, 36);
+            this.ToolBarHelpMenuBt.Text = "Help";
+            // 
+            // HelpMenuHowToUseBt
+            // 
+            this.HelpMenuHowToUseBt.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.HelpMenuHowToUseBt.Name = "HelpMenuHowToUseBt";
+            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(224, 28);
+            this.HelpMenuHowToUseBt.Text = "How to Use";
+            this.HelpMenuHowToUseBt.Click += new System.EventHandler(this.HelpMenuHowToUseBt_Click);
+            // 
+            // HelpMenuAboutBt
+            // 
+            this.HelpMenuAboutBt.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.HelpMenuAboutBt.Name = "HelpMenuAboutBt";
+            this.HelpMenuAboutBt.Size = new System.Drawing.Size(224, 28);
+            this.HelpMenuAboutBt.Text = "About";
+            this.HelpMenuAboutBt.Click += new System.EventHandler(this.HelpMenuAboutBt_Click);
             // 
             // CloseBt
             // 
@@ -174,38 +202,27 @@
             this.MaximizeBt.UseVisualStyleBackColor = false;
             this.MaximizeBt.Click += new System.EventHandler(this.MaximizeBt_Click);
             // 
-            // ToolBarHelpMenuBt
+            // AppTitleLb
             // 
-            this.ToolBarHelpMenuBt.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.ToolBarHelpMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.HelpMenuHowToUseBt,
-            this.HelpMenuAboutBt});
-            this.ToolBarHelpMenuBt.Font = new System.Drawing.Font("Segoe UI", 10.2F);
-            this.ToolBarHelpMenuBt.Name = "ToolBarHelpMenuBt";
-            this.ToolBarHelpMenuBt.Size = new System.Drawing.Size(59, 36);
-            this.ToolBarHelpMenuBt.Text = "Help";
-            // 
-            // HelpMenuHowToUseBt
-            // 
-            this.HelpMenuHowToUseBt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.HelpMenuHowToUseBt.Name = "HelpMenuHowToUseBt";
-            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(224, 28);
-            this.HelpMenuHowToUseBt.Text = "How to Use";
-            this.HelpMenuHowToUseBt.Click += new System.EventHandler(this.HelpMenuHowToUseBt_Click);
-            // 
-            // HelpMenuAboutBt
-            // 
-            this.HelpMenuAboutBt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.HelpMenuAboutBt.Name = "HelpMenuAboutBt";
-            this.HelpMenuAboutBt.Size = new System.Drawing.Size(224, 28);
-            this.HelpMenuAboutBt.Text = "About";
-            this.HelpMenuAboutBt.Click += new System.EventHandler(this.HelpMenuAboutBt_Click);
+            this.AppTitleLb.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.AppTitleLb.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.AppTitleLb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.AppTitleLb.Location = new System.Drawing.Point(400, 0);
+            this.AppTitleLb.Name = "AppTitleLb";
+            this.AppTitleLb.Size = new System.Drawing.Size(240, 40);
+            this.AppTitleLb.TabIndex = 22;
+            this.AppTitleLb.Text = "STL Viewer v2.4.0";
+            this.AppTitleLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AppTitleLb.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDoubleClick);
+            this.AppTitleLb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDown);
+            this.AppTitleLb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseUp);
             // 
             // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 672);
+            this.Controls.Add(this.AppTitleLb);
             this.Controls.Add(this.MaximizeBt);
             this.Controls.Add(this.AppTitleSymbolPicBx);
             this.Controls.Add(this.MinimizeBt);
@@ -241,6 +258,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolBarHelpMenuBt;
         private System.Windows.Forms.ToolStripMenuItem HelpMenuHowToUseBt;
         private System.Windows.Forms.ToolStripMenuItem HelpMenuAboutBt;
+        private System.Windows.Forms.Label AppTitleLb;
     }
 }
 

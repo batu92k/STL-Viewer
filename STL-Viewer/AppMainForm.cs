@@ -192,6 +192,26 @@ namespace STLViewer
             else this.WindowState = FormWindowState.Maximized;
         }
 
+        private void AppTitleLb_MouseDown(object sender, MouseEventArgs e)
+        {
+            moveForm = true;
+            moveOffsetX = MousePosition.X - this.Location.X;
+            moveOffsetY = MousePosition.Y - this.Location.Y;
+        }
+
+        private void AppTitleLb_MouseUp(object sender, MouseEventArgs e)
+        {
+            moveForm = false;
+            moveOffsetX = 0;
+            moveOffsetY = 0;
+        }
+
+        private void AppTitleLb_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized) this.WindowState = FormWindowState.Normal;
+            else this.WindowState = FormWindowState.Maximized;
+        }
+
         private void MaximizeBt_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Maximized) this.WindowState = FormWindowState.Normal;
