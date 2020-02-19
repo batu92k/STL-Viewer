@@ -1,4 +1,4 @@
-# **STL Viewer v2.2.4**
+# **STL Viewer v2.4.0**
 
 ## **About**
 
@@ -8,7 +8,7 @@ Visualization tool for Binary and ASCII formatted STL files.
 
 ## **How to Use**
 
- * Click Select STL File button and import **Binary** or **ASCII** formatted STL file
+ * Click File->Import or use Drag-Drop to select and import **Binary** or **ASCII** formatted STL file
  * Hold right mouse button to **rotate** the object
  * Hold left mouse button to **move** the object
  * Use mouse wheel to **scale** the object
@@ -16,8 +16,11 @@ Visualization tool for Binary and ASCII formatted STL files.
 
 **Note:** Update Mouse Orbit submodule with **"git submodule update --init"** before building the project
 
-## **Whats New in v2.2.4 (Since v1.0)**
-
+## **Whats New in v2.4.0 (Since v1.0)**
+ 
+ * Drag-Drop feature implemented
+ * Toolbar added to UI with Help and File menus
+ * Mouse Orbit module upgraded
  * Tao Framework changed to more up to date OpenGL Frameork OpenTK
  * Mouse Orbit feature implemented to rotate, move, scale the object
  * Model alignment adjusted
