@@ -48,8 +48,9 @@ namespace STLViewer
             orb.UpdateOrbiter(MousePosition.X, MousePosition.Y);
             GL_Monitor.Invalidate();
             if (moveForm)
+            {
                 this.SetDesktopLocation(MousePosition.X - moveOffsetX, MousePosition.Y - moveOffsetY);
-
+            }
         }
 
         private void GL_Monitor_Load(object sender, EventArgs e)
@@ -159,18 +160,34 @@ namespace STLViewer
             Application.Exit();
         }
 
-        private void AppTitleBar_MouseDown(object sender, MouseEventArgs e)
+        private void CloseBt_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MinimizeBt_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void AppToolBarMStp_MouseDown(object sender, MouseEventArgs e)
         {
             moveForm = true;
             moveOffsetX = MousePosition.X - this.Location.X;
             moveOffsetY = MousePosition.Y - this.Location.Y;
         }
 
-        private void AppTitleBar_MouseUp(object sender, MouseEventArgs e)
+        private void AppToolBarMStp_MouseUp(object sender, MouseEventArgs e)
         {
             moveForm = false;
             moveOffsetX = 0;
             moveOffsetY = 0;
+        }
+
+        private void AppToolBarMStp_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized) this.WindowState = FormWindowState.Normal;
+            else this.WindowState = FormWindowState.Maximized;
         }
     }
 }

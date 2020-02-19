@@ -36,7 +36,8 @@
             this.ToolBarFileMenuBt = new System.Windows.Forms.ToolStripMenuItem();
             this.FileMenuImportBt = new System.Windows.Forms.ToolStripMenuItem();
             this.FileMenuExitBt = new System.Windows.Forms.ToolStripMenuItem();
-            this.AppTitleBar = new System.Windows.Forms.MenuStrip();
+            this.CloseBt = new System.Windows.Forms.Button();
+            this.MinimizeBt = new System.Windows.Forms.Button();
             this.AppToolBarMStp.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,10 +51,10 @@
             // 
             this.GL_Monitor.BackColor = System.Drawing.Color.Black;
             this.GL_Monitor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GL_Monitor.Location = new System.Drawing.Point(0, 70);
+            this.GL_Monitor.Location = new System.Drawing.Point(0, 35);
             this.GL_Monitor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GL_Monitor.Name = "GL_Monitor";
-            this.GL_Monitor.Size = new System.Drawing.Size(1045, 602);
+            this.GL_Monitor.Size = new System.Drawing.Size(1045, 637);
             this.GL_Monitor.TabIndex = 15;
             this.GL_Monitor.VSync = false;
             this.GL_Monitor.Load += new System.EventHandler(this.GL_Monitor_Load);
@@ -67,26 +68,30 @@
             this.AppToolBarMStp.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.AppToolBarMStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolBarFileMenuBt});
-            this.AppToolBarMStp.Location = new System.Drawing.Point(0, 35);
+            this.AppToolBarMStp.Location = new System.Drawing.Point(0, 0);
             this.AppToolBarMStp.Name = "AppToolBarMStp";
             this.AppToolBarMStp.Size = new System.Drawing.Size(1045, 35);
             this.AppToolBarMStp.TabIndex = 16;
             this.AppToolBarMStp.Text = "AppToolBar";
+            this.AppToolBarMStp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AppToolBarMStp_MouseDoubleClick);
+            this.AppToolBarMStp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AppToolBarMStp_MouseDown);
+            this.AppToolBarMStp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AppToolBarMStp_MouseUp);
             // 
             // ToolBarFileMenuBt
             // 
             this.ToolBarFileMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuImportBt,
             this.FileMenuExitBt});
+            this.ToolBarFileMenuBt.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ToolBarFileMenuBt.Name = "ToolBarFileMenuBt";
-            this.ToolBarFileMenuBt.Size = new System.Drawing.Size(56, 31);
+            this.ToolBarFileMenuBt.Size = new System.Drawing.Size(49, 31);
             this.ToolBarFileMenuBt.Text = "File";
             // 
             // FileMenuImportBt
             // 
             this.FileMenuImportBt.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.FileMenuImportBt.Name = "FileMenuImportBt";
-            this.FileMenuImportBt.Size = new System.Drawing.Size(158, 32);
+            this.FileMenuImportBt.Size = new System.Drawing.Size(224, 28);
             this.FileMenuImportBt.Text = "Import";
             this.FileMenuImportBt.Click += new System.EventHandler(this.FileMenuImportBt_Click);
             // 
@@ -94,31 +99,51 @@
             // 
             this.FileMenuExitBt.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.FileMenuExitBt.Name = "FileMenuExitBt";
-            this.FileMenuExitBt.Size = new System.Drawing.Size(158, 32);
+            this.FileMenuExitBt.Size = new System.Drawing.Size(224, 28);
             this.FileMenuExitBt.Text = "Exit";
             this.FileMenuExitBt.Click += new System.EventHandler(this.FileMenuExitBt_Click);
             // 
-            // AppTitleBar
+            // CloseBt
             // 
-            this.AppTitleBar.AutoSize = false;
-            this.AppTitleBar.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.AppTitleBar.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.AppTitleBar.Location = new System.Drawing.Point(0, 0);
-            this.AppTitleBar.Name = "AppTitleBar";
-            this.AppTitleBar.Size = new System.Drawing.Size(1045, 35);
-            this.AppTitleBar.TabIndex = 17;
-            this.AppTitleBar.Text = "menuStrip1";
-            this.AppTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AppTitleBar_MouseDown);
-            this.AppTitleBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AppTitleBar_MouseUp);
+            this.CloseBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloseBt.BackColor = System.Drawing.Color.Transparent;
+            this.CloseBt.FlatAppearance.BorderSize = 0;
+            this.CloseBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.CloseBt.ForeColor = System.Drawing.Color.Black;
+            this.CloseBt.Location = new System.Drawing.Point(1005, 0);
+            this.CloseBt.Name = "CloseBt";
+            this.CloseBt.Size = new System.Drawing.Size(40, 35);
+            this.CloseBt.TabIndex = 18;
+            this.CloseBt.Text = "X";
+            this.CloseBt.UseVisualStyleBackColor = false;
+            this.CloseBt.Click += new System.EventHandler(this.CloseBt_Click);
+            // 
+            // MinimizeBt
+            // 
+            this.MinimizeBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MinimizeBt.BackColor = System.Drawing.Color.Transparent;
+            this.MinimizeBt.FlatAppearance.BorderSize = 0;
+            this.MinimizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.MinimizeBt.ForeColor = System.Drawing.Color.Black;
+            this.MinimizeBt.Location = new System.Drawing.Point(959, 0);
+            this.MinimizeBt.Name = "MinimizeBt";
+            this.MinimizeBt.Size = new System.Drawing.Size(40, 35);
+            this.MinimizeBt.TabIndex = 19;
+            this.MinimizeBt.Text = "-";
+            this.MinimizeBt.UseVisualStyleBackColor = false;
+            this.MinimizeBt.Click += new System.EventHandler(this.MinimizeBt_Click);
             // 
             // AppMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 672);
+            this.Controls.Add(this.MinimizeBt);
+            this.Controls.Add(this.CloseBt);
             this.Controls.Add(this.GL_Monitor);
             this.Controls.Add(this.AppToolBarMStp);
-            this.Controls.Add(this.AppTitleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.AppToolBarMStp;
@@ -140,7 +165,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolBarFileMenuBt;
         private System.Windows.Forms.ToolStripMenuItem FileMenuImportBt;
         private System.Windows.Forms.ToolStripMenuItem FileMenuExitBt;
-        private System.Windows.Forms.MenuStrip AppTitleBar;
+        private System.Windows.Forms.Button CloseBt;
+        private System.Windows.Forms.Button MinimizeBt;
     }
 }
 
