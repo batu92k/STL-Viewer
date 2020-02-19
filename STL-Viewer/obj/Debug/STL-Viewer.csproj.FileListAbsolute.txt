@@ -18,3 +18,4 @@ C:\Users\b92k\Documents\GitHub\STL-Viewer\STL-Viewer\obj\Debug\STL Viewer.pdb
 C:\Users\b92k\Documents\GitHub\STL-Viewer\STL-Viewer\obj\Debug\STLViewer.Properties.Resources.resources
 C:\Users\b92k\Documents\GitHub\STL-Viewer\STL-Viewer\obj\Debug\STLViewer.AppMainForm.resources
 C:\Users\b92k\Documents\GitHub\STL-Viewer\STL-Viewer\obj\Debug\STLViewer.AppAboutForm.resources
+C:\Users\b92k\Documents\GitHub\STL-Viewer\STL-Viewer\obj\Debug\STLViewer.AppHowToUseForm.resources

@@ -68,6 +68,12 @@
     <Compile Include="AppAboutForm.Designer.cs">
       <DependentUpon>AppAboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppHowToUseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppHowToUseForm.Designer.cs">
+      <DependentUpon>AppHowToUseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BatuGL.cs" />
     <Compile Include="AppMainForm.cs">
       <SubType>Form</SubType>
@@ -83,6 +89,9 @@
     <Compile Include="STL_Tools\Vector3.cs" />
     <EmbeddedResource Include="AppAboutForm.resx">
       <DependentUpon>AppAboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppHowToUseForm.resx">
+      <DependentUpon>AppHowToUseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AppMainForm.resx">
       <DependentUpon>AppMainForm.cs</DependentUpon>

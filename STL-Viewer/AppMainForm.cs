@@ -233,7 +233,8 @@ namespace STLViewer
 
         private void HelpMenuHowToUseBt_Click(object sender, EventArgs e)
         {
-            // will be implemented
+            AppHowToUseForm newHowToUseForm = new AppHowToUseForm();
+            newHowToUseForm.ShowDialog();
         }
 
         private void HelpMenuAboutBt_Click(object sender, EventArgs e)
