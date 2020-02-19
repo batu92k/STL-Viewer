@@ -22,7 +22,10 @@ namespace STLViewer
     public partial class AppMainForm : Form
     {
         bool monitorLoaded = false;
-        Batu_GL.VAO_TRIANGLES modelVAO; // 3d model vertex array object
+        bool moveForm = false;
+        int moveOffsetX = 0;
+        int moveOffsetY = 0;
+        Batu_GL.VAO_TRIANGLES modelVAO = null; // 3d model vertex array object
         private Orbiter orb;
         Vector3 minPos = new Vector3();
         Vector3 maxPos = new Vector3();
@@ -40,44 +43,13 @@ namespace STLViewer
             GL_Monitor.KeyPress += orb.Control_KeyPress_Event;
         }
 
-        private void FileSelectBt_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog stldosyaSec = new OpenFileDialog();
-            stldosyaSec.Filter = "STL Files|*.stl;*.txt;";
-
-            if (stldosyaSec.ShowDialog() == DialogResult.OK)
-            {
-                STLReader stlReader = new STLReader(stldosyaSec.FileName);
-                TriangleMesh[] meshArray = stlReader.ReadFile();
-                modelVAO = new Batu_GL.VAO_TRIANGLES();
-                modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
-                modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
-                modelVAO.color = Color.Crimson;
-                minPos = stlReader.GetMinMeshPosition(meshArray);
-                maxPos = stlReader.GetMaxMeshPosition(meshArray);
-                orb.Reset_Orientation();
-                orb.Reset_Pan();
-                orb.Reset_Scale();
-                if (!stlReader.Get_Process_Error())
-                {
-                    DrawTimer.Enabled = true;
-                    FileSelectBt.BackColor = Color.DeepSkyBlue;
-                }
-                else
-                {
-                    DrawTimer.Enabled = false;
-                    FileSelectBt.BackColor = Color.Tomato;
-                    /* if there is an error, deinitialize the gl monitor to clear the screen */
-                    Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
-                    GL_Monitor.SwapBuffers();
-                }
-            }
-        }
-
         private void DrawTimer_Tick(object sender, EventArgs e)
         {
             orb.UpdateOrbiter(MousePosition.X, MousePosition.Y);
             GL_Monitor.Invalidate();
+            if (moveForm)
+                this.SetDesktopLocation(MousePosition.X - moveOffsetX, MousePosition.Y - moveOffsetY);
+
         }
 
         private void GL_Monitor_Load(object sender, EventArgs e)
@@ -148,6 +120,57 @@ namespace STLViewer
             GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
             if (modelVAO != null) modelVAO.Draw();
             GL_Monitor.SwapBuffers();
+        }
+
+        private void FileMenuImportBt_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog stldosyaSec = new OpenFileDialog();
+            stldosyaSec.Filter = "STL Files|*.stl;*.txt;";
+
+            if (stldosyaSec.ShowDialog() == DialogResult.OK)
+            {
+                STLReader stlReader = new STLReader(stldosyaSec.FileName);
+                TriangleMesh[] meshArray = stlReader.ReadFile();
+                modelVAO = new Batu_GL.VAO_TRIANGLES();
+                modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
+                modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
+                modelVAO.color = Color.Crimson;
+                minPos = stlReader.GetMinMeshPosition(meshArray);
+                maxPos = stlReader.GetMaxMeshPosition(meshArray);
+                orb.Reset_Orientation();
+                orb.Reset_Pan();
+                orb.Reset_Scale();
+                if (!stlReader.Get_Process_Error())
+                {
+                    DrawTimer.Enabled = true;
+                }
+                else
+                {
+                    modelVAO = null;
+                    /* if there is an error, deinitialize the gl monitor to clear the screen */
+                    Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
+                    GL_Monitor.SwapBuffers();
+                }
+            }
+        }
+
+        private void FileMenuExitBt_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void AppTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            moveForm = true;
+            moveOffsetX = MousePosition.X - this.Location.X;
+            moveOffsetY = MousePosition.Y - this.Location.Y;
+        }
+
+        private void AppTitleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            moveForm = false;
+            moveOffsetX = 0;
+            moveOffsetY = 0;
         }
     }
 }
