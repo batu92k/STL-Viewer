@@ -55,6 +55,7 @@ namespace STLViewer
 
         private void GL_Monitor_Load(object sender, EventArgs e)
         {
+            GL_Monitor.AllowDrop = true;
             monitorLoaded = true;
             GL.ClearColor(Color.Black);
         }
@@ -123,6 +124,28 @@ namespace STLViewer
             GL_Monitor.SwapBuffers();
         }
 
+        private void ReadSelectedFile(string fileName)
+        {
+            STLReader stlReader = new STLReader(fileName);
+            TriangleMesh[] meshArray = stlReader.ReadFile();
+            modelVAO = new Batu_GL.VAO_TRIANGLES();
+            modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
+            modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
+            modelVAO.color = Color.Crimson;
+            minPos = stlReader.GetMinMeshPosition(meshArray);
+            maxPos = stlReader.GetMaxMeshPosition(meshArray);
+            orb.Reset_Orientation();
+            orb.Reset_Pan();
+            orb.Reset_Scale();
+            if (stlReader.Get_Process_Error())
+            { 
+                modelVAO = null;
+                /* if there is an error, deinitialize the gl monitor to clear the screen */
+                Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
+                GL_Monitor.SwapBuffers();
+            }
+        }
+
         private void FileMenuImportBt_Click(object sender, EventArgs e)
         {
             OpenFileDialog stldosyaSec = new OpenFileDialog();
@@ -130,28 +153,7 @@ namespace STLViewer
 
             if (stldosyaSec.ShowDialog() == DialogResult.OK)
             {
-                STLReader stlReader = new STLReader(stldosyaSec.FileName);
-                TriangleMesh[] meshArray = stlReader.ReadFile();
-                modelVAO = new Batu_GL.VAO_TRIANGLES();
-                modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
-                modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
-                modelVAO.color = Color.Crimson;
-                minPos = stlReader.GetMinMeshPosition(meshArray);
-                maxPos = stlReader.GetMaxMeshPosition(meshArray);
-                orb.Reset_Orientation();
-                orb.Reset_Pan();
-                orb.Reset_Scale();
-                if (!stlReader.Get_Process_Error())
-                {
-                    DrawTimer.Enabled = true;
-                }
-                else
-                {
-                    modelVAO = null;
-                    /* if there is an error, deinitialize the gl monitor to clear the screen */
-                    Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
-                    GL_Monitor.SwapBuffers();
-                }
+                ReadSelectedFile(stldosyaSec.FileName);
             }
         }
 
@@ -194,6 +196,39 @@ namespace STLViewer
         {
             if (this.WindowState == FormWindowState.Maximized) this.WindowState = FormWindowState.Normal;
             else this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void GL_Monitor_DragDrop(object sender, DragEventArgs e)
+        {
+            var data = e.Data.GetData(DataFormats.FileDrop);
+            if (data != null)
+            {
+                string[] fileNames = data as string[];
+                string ext = System.IO.Path.GetExtension(fileNames[0]);
+                if (fileNames.Length > 0 && (ext == ".stl" || ext == ".txt"))
+                {
+                    ReadSelectedFile(fileNames[0]);
+                }
+            }
+        }
+
+        private void GL_Monitor_DragEnter(object sender, DragEventArgs e)
+        {
+            // if the extension is not *.txt or *.stl change drag drop effect symbol
+            var data = e.Data.GetData(DataFormats.FileDrop);
+            if (data != null)
+            {
+                string[] fileNames = data as string[];
+                string ext = System.IO.Path.GetExtension(fileNames[0]);
+                if (ext == ".stl" || ext == ".txt") 
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }                
         }
     }
 }

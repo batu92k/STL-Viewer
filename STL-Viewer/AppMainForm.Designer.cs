@@ -52,7 +52,7 @@
             // 
             // GL_Monitor
             // 
-            this.GL_Monitor.BackColor = System.Drawing.Color.Black;
+            this.GL_Monitor.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.GL_Monitor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GL_Monitor.Location = new System.Drawing.Point(0, 40);
             this.GL_Monitor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -61,12 +61,14 @@
             this.GL_Monitor.TabIndex = 15;
             this.GL_Monitor.VSync = false;
             this.GL_Monitor.Load += new System.EventHandler(this.GL_Monitor_Load);
+            this.GL_Monitor.DragDrop += new System.Windows.Forms.DragEventHandler(this.GL_Monitor_DragDrop);
+            this.GL_Monitor.DragEnter += new System.Windows.Forms.DragEventHandler(this.GL_Monitor_DragEnter);
             this.GL_Monitor.Paint += new System.Windows.Forms.PaintEventHandler(this.GL_Monitor_Paint);
             // 
             // AppToolBarMStp
             // 
             this.AppToolBarMStp.AutoSize = false;
-            this.AppToolBarMStp.BackColor = System.Drawing.Color.Firebrick;
+            this.AppToolBarMStp.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.AppToolBarMStp.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.AppToolBarMStp.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.AppToolBarMStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -82,7 +84,7 @@
             // 
             // ToolBarFileMenuBt
             // 
-            this.ToolBarFileMenuBt.BackColor = System.Drawing.Color.Firebrick;
+            this.ToolBarFileMenuBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ToolBarFileMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuImportBt,
             this.FileMenuExitBt});
@@ -111,7 +113,7 @@
             // CloseBt
             // 
             this.CloseBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseBt.BackColor = System.Drawing.Color.Firebrick;
+            this.CloseBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CloseBt.FlatAppearance.BorderSize = 0;
             this.CloseBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -127,7 +129,7 @@
             // MinimizeBt
             // 
             this.MinimizeBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MinimizeBt.BackColor = System.Drawing.Color.Firebrick;
+            this.MinimizeBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.MinimizeBt.FlatAppearance.BorderSize = 0;
             this.MinimizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MinimizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -142,7 +144,7 @@
             // 
             // AppTitleSymbolPicBx
             // 
-            this.AppTitleSymbolPicBx.BackColor = System.Drawing.Color.Firebrick;
+            this.AppTitleSymbolPicBx.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.AppTitleSymbolPicBx.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AppTitleSymbolPicBx.BackgroundImage")));
             this.AppTitleSymbolPicBx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AppTitleSymbolPicBx.ImageLocation = "";
@@ -155,7 +157,7 @@
             // MaximizeBt
             // 
             this.MaximizeBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MaximizeBt.BackColor = System.Drawing.Color.Firebrick;
+            this.MaximizeBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.MaximizeBt.FlatAppearance.BorderSize = 0;
             this.MaximizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MaximizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
