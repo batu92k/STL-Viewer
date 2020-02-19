@@ -62,6 +62,12 @@
     <Compile Include="..\Mouse-Orbit\Mouse_Orbit\Orbiter.cs">
       <Link>Orbiter.cs</Link>
     </Compile>
+    <Compile Include="AppAboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppAboutForm.Designer.cs">
+      <DependentUpon>AppAboutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BatuGL.cs" />
     <Compile Include="AppMainForm.cs">
       <SubType>Form</SubType>
@@ -75,6 +81,9 @@
     <Compile Include="STL_Tools\STLReader.cs" />
     <Compile Include="STL_Tools\TriangleMesh.cs" />
     <Compile Include="STL_Tools\Vector3.cs" />
+    <EmbeddedResource Include="AppAboutForm.resx">
+      <DependentUpon>AppAboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppMainForm.resx">
       <DependentUpon>AppMainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +111,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\stl_viewer_iconpng.png" />
     <Content Include="stl_viewer_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

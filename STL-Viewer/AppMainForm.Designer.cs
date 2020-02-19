@@ -71,7 +71,7 @@
             // AppToolBarMStp
             // 
             this.AppToolBarMStp.AutoSize = false;
-            this.AppToolBarMStp.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.AppToolBarMStp.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.AppToolBarMStp.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.AppToolBarMStp.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.AppToolBarMStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -88,7 +88,7 @@
             // 
             // ToolBarFileMenuBt
             // 
-            this.ToolBarFileMenuBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ToolBarFileMenuBt.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ToolBarFileMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuImportBt,
             this.FileMenuExitBt});
@@ -117,7 +117,7 @@
             // CloseBt
             // 
             this.CloseBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CloseBt.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.CloseBt.FlatAppearance.BorderSize = 0;
             this.CloseBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -133,7 +133,7 @@
             // MinimizeBt
             // 
             this.MinimizeBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MinimizeBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.MinimizeBt.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.MinimizeBt.FlatAppearance.BorderSize = 0;
             this.MinimizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MinimizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -148,7 +148,7 @@
             // 
             // AppTitleSymbolPicBx
             // 
-            this.AppTitleSymbolPicBx.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.AppTitleSymbolPicBx.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.AppTitleSymbolPicBx.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AppTitleSymbolPicBx.BackgroundImage")));
             this.AppTitleSymbolPicBx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AppTitleSymbolPicBx.ImageLocation = "";
@@ -161,7 +161,7 @@
             // MaximizeBt
             // 
             this.MaximizeBt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MaximizeBt.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.MaximizeBt.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.MaximizeBt.FlatAppearance.BorderSize = 0;
             this.MaximizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MaximizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -176,6 +176,7 @@
             // 
             // ToolBarHelpMenuBt
             // 
+            this.ToolBarHelpMenuBt.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.ToolBarHelpMenuBt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HelpMenuHowToUseBt,
             this.HelpMenuAboutBt});

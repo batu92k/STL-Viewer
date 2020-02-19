@@ -238,7 +238,8 @@ namespace STLViewer
 
         private void HelpMenuAboutBt_Click(object sender, EventArgs e)
         {
-            // will be implemented
+            AppAboutForm aboutForm = new AppAboutForm();
+            aboutForm.ShowDialog();
         }
     }
 }
