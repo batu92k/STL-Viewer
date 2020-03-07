@@ -225,7 +225,7 @@ namespace STLViewer
             {
                 string[] fileNames = data as string[];
                 string ext = System.IO.Path.GetExtension(fileNames[0]);
-                if (fileNames.Length > 0 && (ext == ".stl" || ext == ".txt"))
+                if (fileNames.Length > 0 && (ext == ".stl" || ext == ".STL" || ext == ".txt" || ext == ".TXT"))
                 {
                     ReadSelectedFile(fileNames[0]);
                 }
@@ -240,7 +240,7 @@ namespace STLViewer
             {
                 string[] fileNames = data as string[];
                 string ext = System.IO.Path.GetExtension(fileNames[0]);
-                if (ext == ".stl" || ext == ".txt") 
+                if (ext == ".stl" || ext == ".STL" || ext == ".txt" || ext == ".TXT") 
                 {
                     e.Effect = DragDropEffects.Copy;
                 }
