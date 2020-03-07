@@ -130,7 +130,7 @@
             // 
             this.HelpMenuHowToUseBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.HelpMenuHowToUseBt.Name = "HelpMenuHowToUseBt";
-            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(224, 28);
+            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(182, 28);
             this.HelpMenuHowToUseBt.Text = "How to Use";
             this.HelpMenuHowToUseBt.Click += new System.EventHandler(this.HelpMenuHowToUseBt_Click);
             // 
@@ -138,7 +138,7 @@
             // 
             this.HelpMenuAboutBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.HelpMenuAboutBt.Name = "HelpMenuAboutBt";
-            this.HelpMenuAboutBt.Size = new System.Drawing.Size(224, 28);
+            this.HelpMenuAboutBt.Size = new System.Drawing.Size(182, 28);
             this.HelpMenuAboutBt.Text = "About";
             this.HelpMenuAboutBt.Click += new System.EventHandler(this.HelpMenuAboutBt_Click);
             // 
@@ -211,7 +211,7 @@
             this.AppTitleLb.Name = "AppTitleLb";
             this.AppTitleLb.Size = new System.Drawing.Size(240, 40);
             this.AppTitleLb.TabIndex = 22;
-            this.AppTitleLb.Text = "STL Viewer v2.4.0";
+            this.AppTitleLb.Text = "STL Viewer v2.4.2";
             this.AppTitleLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.AppTitleLb.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDoubleClick);
             this.AppTitleLb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDown);
