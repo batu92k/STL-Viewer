@@ -334,9 +334,7 @@ namespace STL_Tools
                             }
 
                             //----------------------------------------------------------------------
-                            line = txtReader.ReadLine().Trim().Replace(" ", ""); // EndLoop
-                            //----------------------------------------------------------------------
-                            line = txtReader.ReadLine().Trim().Replace(" ", ""); // endfacet
+                            line = txtReader.ReadLine().Trim().Replace(" ", ""); // endfacet or EndLoop
 
                             meshList.Add(newMesh); // add mesh to meshList
                         }
