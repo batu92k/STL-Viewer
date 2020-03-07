@@ -1,4 +1,4 @@
-# **STL Viewer v2.4.0**
+# **STL Viewer v2.4.2**
 
 ## **About**
 
@@ -16,7 +16,7 @@ Visualization tool for Binary and ASCII formatted STL files.
 
 **Note:** Update Mouse Orbit submodule with **"git submodule update --init"** before building the project
 
-## **Whats New in v2.4.0 (Since v1.0)**
+## **Whats New in v2.4.2 (Since v1.0)**
  
  * Drag-Drop feature implemented
  * Toolbar added to UI with Help and File menus
