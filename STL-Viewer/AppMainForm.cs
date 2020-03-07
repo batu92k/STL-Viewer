@@ -148,12 +148,12 @@ namespace STLViewer
 
         private void FileMenuImportBt_Click(object sender, EventArgs e)
         {
-            OpenFileDialog stldosyaSec = new OpenFileDialog();
-            stldosyaSec.Filter = "STL Files|*.stl;*.txt;";
+            OpenFileDialog newFileDialog = new OpenFileDialog();
+            newFileDialog.Filter = "STL Files|*.stl;*.txt;";
 
-            if (stldosyaSec.ShowDialog() == DialogResult.OK)
+            if (newFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ReadSelectedFile(stldosyaSec.FileName);
+                ReadSelectedFile(newFileDialog.FileName);
             }
         }
 
