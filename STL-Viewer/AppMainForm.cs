@@ -121,6 +121,22 @@ namespace STLViewer
             GL.Translate(-minPos.x, -minPos.y, -minPos.z);
             GL.Translate(-(maxPos.x - minPos.x) / 2.0f, -(maxPos.y - minPos.y) / 2.0f, -(maxPos.z - minPos.z) / 2.0f);
             if (modelVAO != null) modelVAO.Draw();
+
+            /* WCS for Debug X+ = Red, Y+ = Green, Z+ = Blue */
+            float wcsSize = 1000.0f;
+            GL.LineWidth(5.0f);
+            GL.Begin(PrimitiveType.Lines);
+            GL.Color3(1.0f, 0.0f, 0.0f);
+            GL.Vertex3(0.0f, 0.0f, 0.0f);
+            GL.Vertex3(wcsSize, 0.0f, 0.0f);
+            GL.Color3(0.0f, 1.0f, 0.0f);
+            GL.Vertex3(0.0f, 0.0f, 0.0f);
+            GL.Vertex3(0.0f, wcsSize, 0.0f);
+            GL.Color3(0.0f, 0.0f, 1.0f);
+            GL.Vertex3(0.0f, 0.0f, 0.0f);
+            GL.Vertex3(0.0f, 0.0f, wcsSize);
+            GL.End();
+
             GL_Monitor.SwapBuffers();
         }
 
