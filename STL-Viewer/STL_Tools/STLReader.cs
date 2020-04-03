@@ -272,89 +272,92 @@ namespace STL_Tools
 
             StreamReader txtReader = new StreamReader(filePath);
 
-            string line;
-
+            string lineString;
+            
             while (!txtReader.EndOfStream)
             {
-                line = txtReader.ReadLine().Trim().Replace(" ", "");
+                lineString = txtReader.ReadLine().Trim(); /* delete whitespace in front and tail of the string */
+                string[] lineData = lineString.Split(' ');
 
-                switch (line)
+                if (lineData[0] == "solid")
                 {
-                    case "solid":
+                    while (lineData[0] != "endsolid")
+                    {
+                        lineString = txtReader.ReadLine().Trim(); // facetnormal
+                        lineData = lineString.Split(' ');
 
-                        while (line != "endsolid")
+                        if (lineData[0] == "endsolid") // check if we reach at the end of file
                         {
-                            line = txtReader.ReadLine().Trim().Replace(" ", ""); //facetnormal
-
-                            if (line == "endsolid") // Son satır endsolid denetlemesi
-                            {
-                                break;
-                            }
-
-                            TriangleMesh newMesh = new TriangleMesh(); // define new mesh object
-
-                            /* this try-catch block will be reviewed */
-                            try
-                            {
-                                // FaceNormal 
-                                newMesh.normal1.x = float.Parse(line.Substring(11, 14));
-                                newMesh.normal1.y = float.Parse(line.Substring(25, 14));
-                                newMesh.normal1.z = float.Parse(line.Substring(39, 14));
-
-                                /* normals of vertex 2 and 3 equals to vertex 1's normals */
-                                newMesh.normal2 = newMesh.normal1;
-                                newMesh.normal3 = newMesh.normal1;
-
-                                //----------------------------------------------------------------------
-                                line = txtReader.ReadLine().Trim().Replace(" ", ""); // OuterLoop
-                                //----------------------------------------------------------------------
-
-                                // Vertex1
-                                line = txtReader.ReadLine().Trim().Replace(" ", "");
-
-                                newMesh.vert1.x = float.Parse(line.Substring(6, 14)); //x1
-                                newMesh.vert1.y = float.Parse(line.Substring(20, 14)); // y1
-                                newMesh.vert1.z = float.Parse(line.Substring(34, 14)); // z1
-
-                                // Vertex2
-                                line = txtReader.ReadLine().Trim().Replace(" ", "");
-                                newMesh.vert2.x = float.Parse(line.Substring(6, 14)); //x1
-                                newMesh.vert2.y = float.Parse(line.Substring(20, 14)); // y1
-                                newMesh.vert2.z = float.Parse(line.Substring(34, 14)); // z1
-                                // Vertex3
-                                line = txtReader.ReadLine().Trim().Replace(" ", "");
-                                newMesh.vert3.x = float.Parse(line.Substring(6, 14)); //x1
-                                newMesh.vert3.y = float.Parse(line.Substring(20, 14)); // y1
-                                newMesh.vert3.z = float.Parse(line.Substring(34, 14)); // z1
-                            }
-                            catch
-                            {
-                                processError = true;
-                                break;
-                            }
-
-                            //----------------------------------------------------------------------
-                            line = txtReader.ReadLine().Trim().Replace(" ", ""); // endfacet or EndLoop
-
-                            meshList.Add(newMesh); // add mesh to meshList
+                            break;
                         }
 
+                        TriangleMesh newMesh = new TriangleMesh(); // define new mesh object
 
-                        break;
+                        /* this try-catch block will be reviewed */
+                        try
+                        {
+                            // FaceNormal 
+                            newMesh.normal1.x = float.Parse(lineData[2]);
+                            newMesh.normal1.y = float.Parse(lineData[3]);
+                            newMesh.normal1.z = float.Parse(lineData[4]);
 
-                    default:  
-                        // intentionally left blank
-                        break;
+                            /* normals of vertex 2 and 3 equals to vertex 1's normals */
+                            newMesh.normal2 = newMesh.normal1;
+                            newMesh.normal3 = newMesh.normal1;
 
+                            //----------------------------------------------------------------------
+                            lineString = txtReader.ReadLine(); // Just skip the OuterLoop line
+                            //----------------------------------------------------------------------
 
-                }
+                            // Vertex1
+                            lineString = txtReader.ReadLine().Trim();
+                            /* reduce spaces until string has proper format for split */
+                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
+                            lineData = lineString.Split(' ');
 
-            }
+                            newMesh.vert1.x = float.Parse(lineData[1]); // x1
+                            newMesh.vert1.y = float.Parse(lineData[2]); // y1
+                            newMesh.vert1.z = float.Parse(lineData[3]); // z1
+
+                            // Vertex2
+                            lineString = txtReader.ReadLine().Trim();
+                            /* reduce spaces until string has proper format for split */
+                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
+                            lineData = lineString.Split(' ');
+
+                            newMesh.vert2.x = float.Parse(lineData[1]); // x2
+                            newMesh.vert2.y = float.Parse(lineData[2]); // y2
+                            newMesh.vert2.z = float.Parse(lineData[3]); // z2
+
+                            // Vertex3
+                            lineString = txtReader.ReadLine().Trim();
+                            /* reduce spaces until string has proper format for split */
+                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
+                            lineData = lineString.Split(' ');
+
+                            newMesh.vert3.x = float.Parse(lineData[1]); // x3
+                            newMesh.vert3.y = float.Parse(lineData[2]); // y3
+                            newMesh.vert3.z = float.Parse(lineData[3]); // z3
+                        }
+                        catch
+                        {
+                            processError = true;
+                            break;
+                        }
+
+                        //----------------------------------------------------------------------
+                        lineString = txtReader.ReadLine(); // Just skip the endloop
+                        //----------------------------------------------------------------------
+                        lineString = txtReader.ReadLine(); // Just skip the endfacet
+
+                        meshList.Add(newMesh); // add mesh to meshList
+
+                    } // while linedata[0]
+                } // if solid
+            } // while !endofstream
 
             return meshList.ToArray();
         }
 
     }
-
-
 }
