@@ -29,11 +29,11 @@ namespace BatuGL
             GL.Viewport(refGLControl.Size);
             if(ortho == Ortho_Mode.CENTER)
             {
-                GL.Ortho(-refGLControl.Width / 2, refGLControl.Width / 2, -refGLControl.Height / 2, refGLControl.Height / 2, 20000, -20000);
+                GL.Ortho(-refGLControl.Width / 2, refGLControl.Width / 2, -refGLControl.Height / 2, refGLControl.Height / 2, -20000, +20000);
             }
             else
             {
-                GL.Ortho(0, refGLControl.Width, 0, refGLControl.Height, 20000, -20000);
+                GL.Ortho(0, refGLControl.Width, 0, refGLControl.Height, -20000, +20000);
             }
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearDepth(1.0f);
