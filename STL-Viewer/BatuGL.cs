@@ -47,6 +47,24 @@ namespace BatuGL
             GL.Hint(HintTarget.PolygonSmoothHint, HintMode.Nicest);
         }
 
+        public static void Draw_WCS(float size = 1000.0f)
+        {
+            /* WCS for Debug X+ = Red, Y+ = Green, Z+ = Blue */
+            float wcsSize = 1000.0f;
+            GL.LineWidth(5.0f);
+            GL.Begin(PrimitiveType.Lines);
+            GL.Color3(1.0f, 0.0f, 0.0f);
+            GL.Vertex3(0.0f, 0.0f, 0.0f);
+            GL.Vertex3(wcsSize, 0.0f, 0.0f);
+            GL.Color3(0.0f, 1.0f, 0.0f);
+            GL.Vertex3(0.0f, 0.0f, 0.0f);
+            GL.Vertex3(0.0f, wcsSize, 0.0f);
+            GL.Color3(0.0f, 0.0f, 1.0f);
+            GL.Vertex3(0.0f, 0.0f, 0.0f);
+            GL.Vertex3(0.0f, 0.0f, wcsSize);
+            GL.End();
+        }
+
         public class VAO_TRIANGLES
         {
             public Color color { get; set; }
