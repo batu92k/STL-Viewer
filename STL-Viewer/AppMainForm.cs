@@ -116,7 +116,7 @@ namespace STLViewer
             Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
             if (modelVAO != null) ConfigureBasicLighting(modelVAO.color);
             GL.Translate(orb.PanX, orb.PanY, 0);
-            GL.Rotate(orb.orbitStr.angle, -orb.orbitStr.ox, -orb.orbitStr.oy, orb.orbitStr.oz);
+            GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
             GL.Scale(orb.scaleVal, orb.scaleVal, orb.scaleVal);
             GL.Translate(-minPos.x, -minPos.y, -minPos.z);
             GL.Translate(-(maxPos.x - minPos.x) / 2.0f, -(maxPos.y - minPos.y) / 2.0f, -(maxPos.z - minPos.z) / 2.0f);
