@@ -94,7 +94,7 @@
             this.AppVersionLb.Name = "AppVersionLb";
             this.AppVersionLb.Size = new System.Drawing.Size(163, 32);
             this.AppVersionLb.TabIndex = 4;
-            this.AppVersionLb.Text = "Version 2.4.2";
+            this.AppVersionLb.Text = "Version 2.4.4";
             this.AppVersionLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AuthorTitleLb

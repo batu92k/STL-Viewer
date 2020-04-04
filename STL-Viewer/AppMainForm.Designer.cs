@@ -211,7 +211,7 @@
             this.AppTitleLb.Name = "AppTitleLb";
             this.AppTitleLb.Size = new System.Drawing.Size(240, 40);
             this.AppTitleLb.TabIndex = 22;
-            this.AppTitleLb.Text = "STL Viewer v2.4.2";
+            this.AppTitleLb.Text = "STL Viewer v2.4.4";
             this.AppTitleLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.AppTitleLb.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDoubleClick);
             this.AppTitleLb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDown);
