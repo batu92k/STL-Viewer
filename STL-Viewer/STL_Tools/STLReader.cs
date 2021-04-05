@@ -176,27 +176,15 @@ namespace STL_Tools
         private TriangleMesh[] ReadBinaryFile(string filePath)
         {
             List<TriangleMesh> meshList = new List<TriangleMesh>();
-            int numOfMesh = 0;
-            int i = 0;
-            int byteIndex = 0;
             byte[] fileBytes = File.ReadAllBytes(filePath);
-
-            byte[] temp = new byte[4];
 
             /* 80 bytes title + 4 byte num of triangles + 50 bytes (1 of triangular mesh)  */
             if (fileBytes.Length > 120)
             {
+                int numOfMesh = System.BitConverter.ToInt32(new byte[4]{ fileBytes[80], fileBytes[81],fileBytes[82], fileBytes[83]}, 0);
+                int byteIndex = 84; // set start index just after the title and number of mesh bytes (80 + 4)
 
-                temp[0] = fileBytes[80];
-                temp[1] = fileBytes[81];
-                temp[2] = fileBytes[82];
-                temp[3] = fileBytes[83];
-
-                numOfMesh = System.BitConverter.ToInt32(temp, 0);
-
-                byteIndex = 84;
-
-                for(i = 0; i < numOfMesh; i++)
+                for(int i = 0; i < numOfMesh; i++)
                 {
                     TriangleMesh newMesh = new TriangleMesh();
 
@@ -269,14 +257,11 @@ namespace STL_Tools
         private TriangleMesh[] ReadASCIIFile(string filePath)
         {
             List<TriangleMesh> meshList = new List<TriangleMesh>();
-
             StreamReader txtReader = new StreamReader(filePath);
-
-            string lineString;
             
             while (!txtReader.EndOfStream)
             {
-                lineString = txtReader.ReadLine().Trim(); /* delete whitespace in front and tail of the string */
+                string lineString = txtReader.ReadLine().Trim(); /* delete whitespace in front and tail of the string */
                 string[] lineData = lineString.Split(' ');
 
                 if (lineData[0] == "solid")
@@ -312,7 +297,10 @@ namespace STL_Tools
                             // Vertex1
                             lineString = txtReader.ReadLine().Trim();
                             /* reduce spaces until string has proper format for split */
-                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
+                            while (lineString.IndexOf("  ") != -1) 
+                            {
+                                lineString = lineString.Replace("  ", " "); 
+                            }
                             lineData = lineString.Split(' ');
 
                             newMesh.vert1.x = float.Parse(lineData[1]); // x1
@@ -322,7 +310,10 @@ namespace STL_Tools
                             // Vertex2
                             lineString = txtReader.ReadLine().Trim();
                             /* reduce spaces until string has proper format for split */
-                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
+                            while (lineString.IndexOf("  ") != -1)
+                            {
+                                lineString = lineString.Replace("  ", " ");
+                            }
                             lineData = lineString.Split(' ');
 
                             newMesh.vert2.x = float.Parse(lineData[1]); // x2
@@ -332,7 +323,10 @@ namespace STL_Tools
                             // Vertex3
                             lineString = txtReader.ReadLine().Trim();
                             /* reduce spaces until string has proper format for split */
-                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
+                            while (lineString.IndexOf("  ") != -1)
+                            {
+                                lineString = lineString.Replace("  ", " ");
+                            }
                             lineData = lineString.Split(' ');
 
                             newMesh.vert3.x = float.Parse(lineData[1]); // x3
@@ -345,10 +339,8 @@ namespace STL_Tools
                             break;
                         }
 
-                        //----------------------------------------------------------------------
-                        lineString = txtReader.ReadLine(); // Just skip the endloop
-                        //----------------------------------------------------------------------
-                        lineString = txtReader.ReadLine(); // Just skip the endfacet
+                        lineString = txtReader.ReadLine(); // Skip the endloop text
+                        lineString = txtReader.ReadLine(); // Skip the endfacet text
 
                         meshList.Add(newMesh); // add mesh to meshList
 
