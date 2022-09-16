@@ -29,6 +29,7 @@ namespace STLViewer
         private Orbiter orb;
         Vector3 minPos = new Vector3();
         Vector3 maxPos = new Vector3();
+        private const float kScaleFactor = 5.0f;
 
         public AppMainForm()
         {
@@ -117,7 +118,7 @@ namespace STLViewer
             if (modelVAO != null) ConfigureBasicLighting(modelVAO.color);
             GL.Translate(orb.PanX, orb.PanY, 0);
             GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
-            GL.Scale(orb.scaleVal, orb.scaleVal, orb.scaleVal);
+            GL.Scale(orb.scaleVal * kScaleFactor, orb.scaleVal * kScaleFactor, orb.scaleVal * kScaleFactor); // small multiplication factor to scaling
             GL.Translate(-minPos.x, -minPos.y, -minPos.z);
             GL.Translate(-(maxPos.x - minPos.x) / 2.0f, -(maxPos.y - minPos.y) / 2.0f, -(maxPos.z - minPos.z) / 2.0f);
             if (modelVAO != null) modelVAO.Draw();
