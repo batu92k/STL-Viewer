@@ -73,19 +73,19 @@ namespace STLViewer
             0.2f * modelColor.B / 255.0f,
             1.0f };
             float[] light_2 = new float[] {
-            3.0f * modelColor.R / 255.0f,
-            3.0f * modelColor.G / 255.0f,
-            3.0f * modelColor.B / 255.0f,
+            10.0f * modelColor.R / 255.0f,
+            10.0f * modelColor.G / 255.0f,
+            10.0f * modelColor.B / 255.0f,
             1.0f };
             float[] specref = new float[] { 
-                0.01f * modelColor.R / 255.0f, 
-                0.01f * modelColor.G / 255.0f, 
-                0.01f * modelColor.B / 255.0f, 
+                0.2f * modelColor.R / 255.0f, 
+                0.2f * modelColor.G / 255.0f, 
+                0.2f * modelColor.B / 255.0f, 
                 1.0f };
             float[] specular_0 = new float[] { -1.0f, -1.0f, 1.0f, 1.0f };
             float[] specular_1 = new float[] { 1.0f, -1.0f, 1.0f, 1.0f };
-            float[] lightPos_0 = new float[] { 1000f, 1000f, -200.0f, 1.0f };
-            float[] lightPos_1 = new float[] { -1000f, 1000f, -200.0f, 1.0f };
+            float[] lightPos_0 = new float[] { 1000f, 1000f, -200.0f, 0.0f };
+            float[] lightPos_1 = new float[] { -1000f, 1000f, -200.0f, 0.0f };
 
             GL.Enable(EnableCap.Lighting);
             /* light 0 */
