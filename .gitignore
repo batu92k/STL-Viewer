@@ -325,3 +325,4 @@ ASALocalRun/
 *.manifest
 *.exe
 triangle_mesh 1/obj/
+obj/
