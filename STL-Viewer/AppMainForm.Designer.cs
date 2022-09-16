@@ -58,10 +58,9 @@
             // 
             this.GL_Monitor.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.GL_Monitor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GL_Monitor.Location = new System.Drawing.Point(0, 40);
-            this.GL_Monitor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GL_Monitor.Location = new System.Drawing.Point(0, 32);
             this.GL_Monitor.Name = "GL_Monitor";
-            this.GL_Monitor.Size = new System.Drawing.Size(1045, 632);
+            this.GL_Monitor.Size = new System.Drawing.Size(784, 514);
             this.GL_Monitor.TabIndex = 15;
             this.GL_Monitor.VSync = false;
             this.GL_Monitor.Load += new System.EventHandler(this.GL_Monitor_Load);
@@ -80,7 +79,8 @@
             this.ToolBarHelpMenuBt});
             this.AppToolBarMStp.Location = new System.Drawing.Point(0, 0);
             this.AppToolBarMStp.Name = "AppToolBarMStp";
-            this.AppToolBarMStp.Size = new System.Drawing.Size(1045, 40);
+            this.AppToolBarMStp.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.AppToolBarMStp.Size = new System.Drawing.Size(784, 32);
             this.AppToolBarMStp.TabIndex = 16;
             this.AppToolBarMStp.Text = "AppToolBar";
             this.AppToolBarMStp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AppToolBarMStp_MouseDoubleClick);
@@ -96,14 +96,14 @@
             this.ToolBarFileMenuBt.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ToolBarFileMenuBt.Margin = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.ToolBarFileMenuBt.Name = "ToolBarFileMenuBt";
-            this.ToolBarFileMenuBt.Size = new System.Drawing.Size(49, 36);
+            this.ToolBarFileMenuBt.Size = new System.Drawing.Size(41, 28);
             this.ToolBarFileMenuBt.Text = "File";
             // 
             // FileMenuImportBt
             // 
             this.FileMenuImportBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.FileMenuImportBt.Name = "FileMenuImportBt";
-            this.FileMenuImportBt.Size = new System.Drawing.Size(146, 28);
+            this.FileMenuImportBt.Size = new System.Drawing.Size(120, 24);
             this.FileMenuImportBt.Text = "Import";
             this.FileMenuImportBt.Click += new System.EventHandler(this.FileMenuImportBt_Click);
             // 
@@ -111,7 +111,7 @@
             // 
             this.FileMenuExitBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.FileMenuExitBt.Name = "FileMenuExitBt";
-            this.FileMenuExitBt.Size = new System.Drawing.Size(146, 28);
+            this.FileMenuExitBt.Size = new System.Drawing.Size(120, 24);
             this.FileMenuExitBt.Text = "Exit";
             this.FileMenuExitBt.Click += new System.EventHandler(this.FileMenuExitBt_Click);
             // 
@@ -123,14 +123,14 @@
             this.HelpMenuAboutBt});
             this.ToolBarHelpMenuBt.Font = new System.Drawing.Font("Segoe UI", 10.2F);
             this.ToolBarHelpMenuBt.Name = "ToolBarHelpMenuBt";
-            this.ToolBarHelpMenuBt.Size = new System.Drawing.Size(59, 36);
+            this.ToolBarHelpMenuBt.Size = new System.Drawing.Size(49, 28);
             this.ToolBarHelpMenuBt.Text = "Help";
             // 
             // HelpMenuHowToUseBt
             // 
             this.HelpMenuHowToUseBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.HelpMenuHowToUseBt.Name = "HelpMenuHowToUseBt";
-            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(182, 28);
+            this.HelpMenuHowToUseBt.Size = new System.Drawing.Size(150, 24);
             this.HelpMenuHowToUseBt.Text = "How to Use";
             this.HelpMenuHowToUseBt.Click += new System.EventHandler(this.HelpMenuHowToUseBt_Click);
             // 
@@ -138,7 +138,7 @@
             // 
             this.HelpMenuAboutBt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.HelpMenuAboutBt.Name = "HelpMenuAboutBt";
-            this.HelpMenuAboutBt.Size = new System.Drawing.Size(182, 28);
+            this.HelpMenuAboutBt.Size = new System.Drawing.Size(150, 24);
             this.HelpMenuAboutBt.Text = "About";
             this.HelpMenuAboutBt.Click += new System.EventHandler(this.HelpMenuAboutBt_Click);
             // 
@@ -150,9 +150,10 @@
             this.CloseBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.CloseBt.ForeColor = System.Drawing.Color.Black;
-            this.CloseBt.Location = new System.Drawing.Point(1005, 0);
+            this.CloseBt.Location = new System.Drawing.Point(754, 0);
+            this.CloseBt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CloseBt.Name = "CloseBt";
-            this.CloseBt.Size = new System.Drawing.Size(40, 40);
+            this.CloseBt.Size = new System.Drawing.Size(30, 32);
             this.CloseBt.TabIndex = 18;
             this.CloseBt.Text = "X";
             this.CloseBt.UseVisualStyleBackColor = false;
@@ -166,9 +167,10 @@
             this.MinimizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MinimizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.MinimizeBt.ForeColor = System.Drawing.Color.Black;
-            this.MinimizeBt.Location = new System.Drawing.Point(913, 0);
+            this.MinimizeBt.Location = new System.Drawing.Point(685, 0);
+            this.MinimizeBt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MinimizeBt.Name = "MinimizeBt";
-            this.MinimizeBt.Size = new System.Drawing.Size(40, 40);
+            this.MinimizeBt.Size = new System.Drawing.Size(30, 32);
             this.MinimizeBt.TabIndex = 19;
             this.MinimizeBt.Text = "-";
             this.MinimizeBt.UseVisualStyleBackColor = false;
@@ -180,9 +182,10 @@
             this.AppTitleSymbolPicBx.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("AppTitleSymbolPicBx.BackgroundImage")));
             this.AppTitleSymbolPicBx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AppTitleSymbolPicBx.ImageLocation = "";
-            this.AppTitleSymbolPicBx.Location = new System.Drawing.Point(8, 5);
+            this.AppTitleSymbolPicBx.Location = new System.Drawing.Point(6, 4);
+            this.AppTitleSymbolPicBx.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AppTitleSymbolPicBx.Name = "AppTitleSymbolPicBx";
-            this.AppTitleSymbolPicBx.Size = new System.Drawing.Size(30, 30);
+            this.AppTitleSymbolPicBx.Size = new System.Drawing.Size(22, 24);
             this.AppTitleSymbolPicBx.TabIndex = 20;
             this.AppTitleSymbolPicBx.TabStop = false;
             // 
@@ -194,9 +197,10 @@
             this.MaximizeBt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MaximizeBt.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.MaximizeBt.ForeColor = System.Drawing.Color.Black;
-            this.MaximizeBt.Location = new System.Drawing.Point(959, 0);
+            this.MaximizeBt.Location = new System.Drawing.Point(719, 0);
+            this.MaximizeBt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBt.Name = "MaximizeBt";
-            this.MaximizeBt.Size = new System.Drawing.Size(40, 40);
+            this.MaximizeBt.Size = new System.Drawing.Size(30, 32);
             this.MaximizeBt.TabIndex = 21;
             this.MaximizeBt.Text = "▭";
             this.MaximizeBt.UseVisualStyleBackColor = false;
@@ -207,11 +211,12 @@
             this.AppTitleLb.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.AppTitleLb.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.AppTitleLb.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.AppTitleLb.Location = new System.Drawing.Point(400, 0);
+            this.AppTitleLb.Location = new System.Drawing.Point(300, 0);
+            this.AppTitleLb.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.AppTitleLb.Name = "AppTitleLb";
-            this.AppTitleLb.Size = new System.Drawing.Size(240, 40);
+            this.AppTitleLb.Size = new System.Drawing.Size(180, 32);
             this.AppTitleLb.TabIndex = 22;
-            this.AppTitleLb.Text = "STL Viewer v2.4.4";
+            this.AppTitleLb.Text = "STL Viewer v2.4.5";
             this.AppTitleLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.AppTitleLb.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDoubleClick);
             this.AppTitleLb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AppTitleLb_MouseDown);
@@ -219,9 +224,9 @@
             // 
             // AppMainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 672);
+            this.ClientSize = new System.Drawing.Size(784, 546);
             this.Controls.Add(this.AppTitleLb);
             this.Controls.Add(this.MaximizeBt);
             this.Controls.Add(this.AppTitleSymbolPicBx);
@@ -232,7 +237,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.AppToolBarMStp;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AppMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STL Viewer";
