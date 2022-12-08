@@ -264,5 +264,16 @@ namespace STLViewer
             AppAboutForm aboutForm = new AppAboutForm();
             aboutForm.ShowDialog();
         }
+
+        private void ExportAsImageBt_Click(object sender, EventArgs e)
+        {
+            // take the capture of the form area and save it into a bitmap file
+            Bitmap screenCaptureBitmap = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+            System.Drawing.Imaging.BitmapData data = screenCaptureBitmap.LockBits(this.ClientRectangle, System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            GL.ReadPixels(0, 0, this.ClientSize.Width, this.ClientSize.Height, PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
+            screenCaptureBitmap.UnlockBits(data);
+            screenCaptureBitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            screenCaptureBitmap.Save("Capture.png");
+        }
     }
 }
