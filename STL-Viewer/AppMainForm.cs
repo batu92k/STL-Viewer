@@ -42,6 +42,7 @@ namespace STLViewer
             GL_Monitor.MouseUp += orb.Control_MouseUpEvent;
             GL_Monitor.MouseWheel += orb.Control_MouseWheelEvent;
             GL_Monitor.KeyPress += orb.Control_KeyPress_Event;
+            ExportAsImageBt.Enabled = false;
         }
 
         private void DrawTimer_Tick(object sender, EventArgs e)
@@ -139,8 +140,11 @@ namespace STLViewer
             orb.Reset_Orientation();
             orb.Reset_Pan();
             orb.Reset_Scale();
-            if (stlReader.Get_Process_Error())
-            { 
+            bool isProcessFailed = stlReader.Get_Process_Error();
+            ExportAsImageBt.Enabled = !isProcessFailed;
+
+            if (isProcessFailed)
+            {
                 modelVAO = null;
                 /* if there is an error, deinitialize the gl monitor to clear the screen */
                 Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
@@ -267,13 +271,22 @@ namespace STLViewer
 
         private void ExportAsImageBt_Click(object sender, EventArgs e)
         {
-            // take the capture of the form area and save it into a bitmap file
-            Bitmap screenCaptureBitmap = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
-            System.Drawing.Imaging.BitmapData data = screenCaptureBitmap.LockBits(this.ClientRectangle, System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            GL.ReadPixels(0, 0, this.ClientSize.Width, this.ClientSize.Height, PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
-            screenCaptureBitmap.UnlockBits(data);
-            screenCaptureBitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
-            screenCaptureBitmap.Save("Capture.png");
+            SaveFileDialog captureSaveDialog = new SaveFileDialog();
+            captureSaveDialog.Filter = "Bitmap Image|*.bmp";
+            if (captureSaveDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = captureSaveDialog.FileName;
+                // take the capture of the form area and save it into a bitmap file
+                Bitmap screenCaptureBitmap = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+                System.Drawing.Imaging.BitmapData data = screenCaptureBitmap.LockBits(this.ClientRectangle, System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                GL.ReadPixels(0, 0, this.ClientSize.Width, this.ClientSize.Height, PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
+                screenCaptureBitmap.UnlockBits(data);
+                screenCaptureBitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                screenCaptureBitmap.Save(fileName);
+            }
+
+
+
         }
     }
 }
