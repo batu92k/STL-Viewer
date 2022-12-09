@@ -1,4 +1,4 @@
-# **STL Viewer v2.4.4**
+# **STL Viewer v2.4.5**
 
 ## **About**
 
@@ -14,10 +14,12 @@ Visualization tool for Binary and ASCII formatted STL files.
  * Use mouse wheel to **scale** the object
  * Press **R** key to **reset** view
 
-**Note:** Update Mouse Orbit submodule with **"git submodule update --init"** before building the project
+**Note:** Update Mouse Orbit submodule with **"git submodule update --init"** before building the project or clone the repository via **"git clone --recursive https://github.com/batu92k/STL-Viewer.git"**
 
-## **Whats New in v2.4.4 (Since v1.0)**
- 
+## **v2.4.5 Release notes**
+ * Better lighting of the model
+
+## **v1.0 to v2.4.4 Release notes**
  * Drag-Drop feature implemented
  * Toolbar added to UI with Help and File menus
  * Mouse Orbit module upgraded

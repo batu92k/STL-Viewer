@@ -94,7 +94,7 @@
             this.AppVersionLb.Name = "AppVersionLb";
             this.AppVersionLb.Size = new System.Drawing.Size(163, 32);
             this.AppVersionLb.TabIndex = 4;
-            this.AppVersionLb.Text = "Version 2.4.4";
+            this.AppVersionLb.Text = "Version 2.4.5";
             this.AppVersionLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AuthorTitleLb
@@ -147,7 +147,7 @@
             // 
             // AppAboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
