@@ -84,9 +84,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="STL_Tools\STLData.cs" />
-    <Compile Include="STL_Tools\STLExport.cs" />
-    <Compile Include="STL_Tools\STLReader.cs" />
+    <Compile Include="STL_Tools\StlData.cs" />
+    <Compile Include="STL_Tools\StlExport.cs" />
+    <Compile Include="STL_Tools\StlReader.cs" />
     <Compile Include="STL_Tools\TriangleMesh.cs" />
     <Compile Include="STL_Tools\Vector3.cs" />
     <EmbeddedResource Include="AppAboutForm.resx">

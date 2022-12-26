@@ -6,15 +6,11 @@
   * @brief   
   ******************************************************************************
   */
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace STL_Tools
 {
-    public class STLData
+    public class StlData
     {
         public List<TriangleMesh> meshList;
         public Vector3 maxVec = new Vector3(); // max position of model
@@ -24,7 +20,7 @@ namespace STL_Tools
         /// <summary>
         /// Default constructor of STLData class.
         /// </summary>
-        public STLData()
+        public StlData()
         {
             meshList = new List<TriangleMesh>();
         }

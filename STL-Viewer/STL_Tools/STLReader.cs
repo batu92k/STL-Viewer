@@ -16,12 +16,12 @@ using System.Threading;
 namespace STL_Tools
 {
     public enum StlFileType { NONE, BINARY, ASCII }; // stl file type enumeration
-    public class STLReader
+    public class StlReader
     {
         /// <summary>
         /// Constructor.
         /// </summary>
-        public STLReader()
+        public StlReader()
         {
             // To fix dot vs comma in floating point numbers
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -36,10 +36,10 @@ namespace STL_Tools
         /// <param name="filePath"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public STLData ReadAnyStlFile(string filePath, out bool result)
+        public StlData ReadAnyStlFile(string filePath, out bool result)
         {
             StlFileType stlFileType = GetFileType(filePath);
-            STLData stlData;
+            StlData stlData;
 
             if (stlFileType == StlFileType.ASCII)
             {
@@ -156,9 +156,9 @@ namespace STL_Tools
         /// <param name="filePath"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public STLData ReadBinaryStlFile(string filePath, out bool result)
+        public StlData ReadBinaryStlFile(string filePath, out bool result)
         {
-            STLData binaryStlData = new STLData();
+            StlData binaryStlData = new StlData();
             byte[] fileBytes = File.ReadAllBytes(filePath);
 
             /* 80 bytes title + 4 byte num of triangles + 50 bytes (1 of triangular mesh)  */
@@ -245,9 +245,9 @@ namespace STL_Tools
         /// <param name="filePath"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public STLData ReadAsciiStlFile(string filePath, out bool result)
+        public StlData ReadAsciiStlFile(string filePath, out bool result)
         {
-            STLData asciiStlData = new STLData();
+            StlData asciiStlData = new StlData();
             StreamReader txtReader = new StreamReader(filePath);
             
             while (!txtReader.EndOfStream)

@@ -129,9 +129,9 @@ namespace STLViewer
 
         private void ReadSelectedFile(string fileName)
         {
-            STLReader stlReader = new STLReader();
+            StlReader stlReader = new StlReader();
             bool isProcessSucceeded;
-            STLData stlData = stlReader.ReadAnyStlFile(fileName, out isProcessSucceeded);
+            StlData stlData = stlReader.ReadAnyStlFile(fileName, out isProcessSucceeded);
             ExportAsImageBt.Enabled = isProcessSucceeded;
             if (stlData == null || !isProcessSucceeded)
             {
@@ -142,8 +142,8 @@ namespace STLViewer
             }
 
             modelVAO = new Batu_GL.VAO_TRIANGLES();
-            modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(stlData.meshList.ToArray());
-            modelVAO.normalArray = STLExport.Get_Mesh_Normals(stlData.meshList.ToArray());
+            modelVAO.parameterArray = StlExport.Get_Mesh_Vertices(stlData.meshList.ToArray());
+            modelVAO.normalArray = StlExport.Get_Mesh_Normals(stlData.meshList.ToArray());
             modelVAO.color = Color.Crimson;
             minPos = stlData.minVec;
             maxPos = stlData.maxVec;
