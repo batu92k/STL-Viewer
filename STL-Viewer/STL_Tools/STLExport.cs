@@ -13,7 +13,7 @@ using System.Collections.Generic;
 namespace STL_Tools
 {
 
-    public static class STLExport
+    public static class StlExport
     {
 
         /**

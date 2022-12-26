@@ -15,134 +15,116 @@ using System.Threading;
 
 namespace STL_Tools
 {
-
-    public class STLReader
+    public enum StlFileType { NONE, BINARY, ASCII }; // stl file type enumeration
+    public class StlReader
     {
-
-        public string path; // file path
-        private enum FileType { NONE, BINARY, ASCII }; // stl file type enumeration
-        private bool processError;
-
-        /**
-        * @brief  Class instance constructor
-        * @param  none
-        * @retval none
-        */
-        public STLReader(string filePath = "")
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        public StlReader()
         {
+            // To fix dot vs comma in floating point numbers
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            path = filePath;
-            processError = false;
         }
 
 
-        /**
-        * @brief  This function returns the process error value if its true there is an error on process
-        * @param  none
-        * @retval none
-        */
-        public bool Get_Process_Error()
+        /// <summary>
+        /// This method reads any (ascii or binary) stl file and detect the file type
+        /// automatically.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public StlData ReadAnyStlFile(string filePath, out bool result)
         {
-            return processError;
-        }
+            StlFileType stlFileType = GetFileType(filePath);
+            StlData stlData;
 
-
-        /**
-        * @brief  *.stl file main read function
-        * @param  none
-        * @retval meshList
-        */
-        public TriangleMesh[] ReadFile()
-        {
-            TriangleMesh[] meshList;
-
-            FileType stlFileType = GetFileType(path);
-           
-            if(stlFileType == FileType.ASCII)
+            if (stlFileType == StlFileType.ASCII)
             {
-                meshList = ReadASCIIFile(path);
+                stlData = ReadAsciiStlFile(filePath, out result);
             }
-            else if(stlFileType == FileType.BINARY)
+            else if(stlFileType == StlFileType.BINARY)
             {
-                meshList = ReadBinaryFile(path);
+                stlData = ReadBinaryStlFile(filePath, out result);
             }
             else
             {
-                meshList = null;
+                result = false;
+                stlData = null;
             }
 
-            return meshList;
+            return stlData;
         }
 
-        /**
-        * @brief  This function returns the min position of objects bounding box by checking
-        *         all triangle meshes
-        * @param  meshArray
-        * @retval Vector3
-        */
-        public Vector3 GetMinMeshPosition(TriangleMesh[] meshArray)
+        
+        /// <summary>
+        /// This function returns the min position of objects 
+        /// bounding box by checking all triangle meshes
+        /// </summary>
+        /// <param name="meshList"></param>
+        /// <returns></returns>
+        private Vector3 GetMinMeshPosition(List<TriangleMesh> meshList)
         {
             Vector3 minVec = new Vector3();
             float[] minRefArray = new float[3];
-            minRefArray[0] = meshArray.Min(j => j.vert1.x);
-            minRefArray[1] = meshArray.Min(j => j.vert2.x);
-            minRefArray[2] = meshArray.Min(j => j.vert3.x);
+            minRefArray[0] = meshList.Min(j => j.vert1.x);
+            minRefArray[1] = meshList.Min(j => j.vert2.x);
+            minRefArray[2] = meshList.Min(j => j.vert3.x);
             minVec.x = minRefArray.Min();
-            minRefArray[0] = meshArray.Min(j => j.vert1.y);
-            minRefArray[1] = meshArray.Min(j => j.vert2.y);
-            minRefArray[2] = meshArray.Min(j => j.vert3.y);
+            minRefArray[0] = meshList.Min(j => j.vert1.y);
+            minRefArray[1] = meshList.Min(j => j.vert2.y);
+            minRefArray[2] = meshList.Min(j => j.vert3.y);
             minVec.y = minRefArray.Min();
-            minRefArray[0] = meshArray.Min(j => j.vert1.z);
-            minRefArray[1] = meshArray.Min(j => j.vert2.z);
-            minRefArray[2] = meshArray.Min(j => j.vert3.z);
+            minRefArray[0] = meshList.Min(j => j.vert1.z);
+            minRefArray[1] = meshList.Min(j => j.vert2.z);
+            minRefArray[2] = meshList.Min(j => j.vert3.z);
             minVec.z = minRefArray.Min();
             return minVec;
         }
 
-        /**
-        * @brief  This function returns the max position of objects bounding box by checking
-        *         all triangle meshes
-        * @param  meshArray
-        * @retval Vector3
-        */
-        public Vector3 GetMaxMeshPosition(TriangleMesh[] meshArray)
+        /// <summary>
+        /// This function returns the max position of objects 
+        /// bounding box by checking all triangle meshes
+        /// </summary>
+        /// <param name="meshList"></param>
+        /// <returns></returns>
+        private Vector3 GetMaxMeshPosition(List<TriangleMesh> meshList)
         {
             Vector3 maxVec = new Vector3();
             float[] maxRefArray = new float[3];
-            maxRefArray[0] = meshArray.Max(j => j.vert1.x);
-            maxRefArray[1] = meshArray.Max(j => j.vert2.x);
-            maxRefArray[2] = meshArray.Max(j => j.vert3.x);
+            maxRefArray[0] = meshList.Max(j => j.vert1.x);
+            maxRefArray[1] = meshList.Max(j => j.vert2.x);
+            maxRefArray[2] = meshList.Max(j => j.vert3.x);
             maxVec.x = maxRefArray.Max();
-            maxRefArray[0] = meshArray.Max(j => j.vert1.y);
-            maxRefArray[1] = meshArray.Max(j => j.vert2.y);
-            maxRefArray[2] = meshArray.Max(j => j.vert3.y);
+            maxRefArray[0] = meshList.Max(j => j.vert1.y);
+            maxRefArray[1] = meshList.Max(j => j.vert2.y);
+            maxRefArray[2] = meshList.Max(j => j.vert3.y);
             maxVec.y = maxRefArray.Max();
-            maxRefArray[0] = meshArray.Max(j => j.vert1.z);
-            maxRefArray[1] = meshArray.Max(j => j.vert2.z);
-            maxRefArray[2] = meshArray.Max(j => j.vert3.z);
+            maxRefArray[0] = meshList.Max(j => j.vert1.z);
+            maxRefArray[1] = meshList.Max(j => j.vert2.z);
+            maxRefArray[2] = meshList.Max(j => j.vert3.z);
             maxVec.z = maxRefArray.Max();
             return maxVec;
         }
 
-        /**
-        * @brief  This function checks the type of stl file binary or ascii, function is assuming
-        *         given file as proper *.stl file 
-        * @param  none
-        * @retval stlFileType
-        */
-        private FileType GetFileType(string filePath)
+
+        /// <summary>
+        /// This function checks the type of stl file binary or ascii, 
+        /// function is assuming given file as proper *.stl file 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private StlFileType GetFileType(string filePath)
         {
-            FileType stlFileType = FileType.NONE;
+            StlFileType stlFileType = StlFileType.NONE;
 
             /* check path is exist */
             if (File.Exists(filePath))
             {
-                int lineCount = 0;
-                lineCount = File.ReadLines(filePath).Count(); // number of lines in the file
-
+                int lineCount = File.ReadLines(filePath).Count(); // number of lines in the file
                 string firstLine = File.ReadLines(filePath).First();
-
                 string endLines = File.ReadLines(filePath).Skip(lineCount - 1).Take(1).First() +
                                   File.ReadLines(filePath).Skip(lineCount - 2).Take(1).First();
 
@@ -150,141 +132,135 @@ namespace STL_Tools
                 if((firstLine.IndexOf("solid") != -1) &
                     (endLines.IndexOf("endsolid") != -1))
                 {
-                    stlFileType = FileType.ASCII;
+                    stlFileType = StlFileType.ASCII;
                 }
                 else
                 {
-                    stlFileType = FileType.BINARY;
+                    stlFileType = StlFileType.BINARY;
                 }
 
             }
             else
             {
-                stlFileType = FileType.NONE;
+                stlFileType = StlFileType.NONE;
             }
 
 
             return stlFileType;
         }
 
-        
-        /**
-        * @brief  *.stl file binary read function
-        * @param  filePath
-        * @retval meshList
-        */
-        private TriangleMesh[] ReadBinaryFile(string filePath)
+
+        /// <summary>
+        /// Reads given binary stl file and returns the stl data container class.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public StlData ReadBinaryStlFile(string filePath, out bool result)
         {
-            List<TriangleMesh> meshList = new List<TriangleMesh>();
-            int numOfMesh = 0;
-            int i = 0;
-            int byteIndex = 0;
+            StlData binaryStlData = new StlData();
             byte[] fileBytes = File.ReadAllBytes(filePath);
 
-            byte[] temp = new byte[4];
-
             /* 80 bytes title + 4 byte num of triangles + 50 bytes (1 of triangular mesh)  */
-            if (fileBytes.Length > 120)
+            if (fileBytes.Length <= 120)
             {
+                result = false;
+                binaryStlData = null;
+                return binaryStlData;
+            }
 
-                temp[0] = fileBytes[80];
-                temp[1] = fileBytes[81];
-                temp[2] = fileBytes[82];
-                temp[3] = fileBytes[83];
+            int numOfMesh = System.BitConverter.ToInt32(
+                new byte[] { fileBytes[80], fileBytes[81], fileBytes[82], fileBytes[83] }, 0);
 
-                numOfMesh = System.BitConverter.ToInt32(temp, 0);
+            int byteIndex = 84;
 
-                byteIndex = 84;
+            for (int i = 0; i < numOfMesh; i++)
+            {
+                TriangleMesh newMesh = new TriangleMesh();
 
-                for(i = 0; i < numOfMesh; i++)
+                /* this try-catch block will be reviewed */
+                try
                 {
-                    TriangleMesh newMesh = new TriangleMesh();
+                    /* face normal */
+                    newMesh.normal1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.normal1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.normal1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
 
-                    /* this try-catch block will be reviewed */
-                    try
-                    {
-                        /* face normal */
-                        newMesh.normal1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.normal1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.normal1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
+                    /* normals of vertex 2 and 3 equals to vertex 1's normals */
+                    newMesh.normal2 = newMesh.normal1;
+                    newMesh.normal3 = newMesh.normal1;
 
-                        /* normals of vertex 2 and 3 equals to vertex 1's normals */
-                        newMesh.normal2 = newMesh.normal1;
-                        newMesh.normal3 = newMesh.normal1;
+                    /* vertex 1 */
+                    newMesh.vert1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.vert1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.vert1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
 
-                        /* vertex 1 */
-                        newMesh.vert1.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert1.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert1.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
+                    /* vertex 2 */
+                    newMesh.vert2.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.vert2.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.vert2.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
 
-                        /* vertex 2 */
-                        newMesh.vert2.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert2.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert2.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
+                    /* vertex 3 */
+                    newMesh.vert3.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.vert3.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
+                    newMesh.vert3.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
+                    byteIndex += 4;
 
-                        /* vertex 3 */
-                        newMesh.vert3.x = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert3.y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert3.z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-
-                        byteIndex += 2; // Attribute byte count
-                    }
-                    catch
-                    {
-                        processError = true;
-                        break;
-                    }
-
-                    meshList.Add(newMesh);
-
+                    byteIndex += 2; // Attribute byte count
+                }
+                catch
+                {
+                    result = false;
+                    binaryStlData = null;
+                    return binaryStlData;
                 }
 
-            }
-            else
-            {
-                // nitentionally left blank
+                binaryStlData.meshList.Add(newMesh);
             }
 
-            return meshList.ToArray();
+            // TODO: review this, methods cycling through the whole list again and again!
+            binaryStlData.minVec = GetMinMeshPosition(binaryStlData.meshList);
+            binaryStlData.maxVec = GetMaxMeshPosition(binaryStlData.meshList);
+            binaryStlData.fileType = StlFileType.BINARY;
+
+            result = true;
+            return binaryStlData;
         }
 
 
-        /**
-        * @brief  *.stl file ascii read function
-        * @param  filePath
-        * @retval meshList
-        */
-        private TriangleMesh[] ReadASCIIFile(string filePath)
+        /// <summary>
+        /// Reads given ascii stl file and returns the stl data container class.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public StlData ReadAsciiStlFile(string filePath, out bool result)
         {
-            List<TriangleMesh> meshList = new List<TriangleMesh>();
-
+            StlData asciiStlData = new StlData();
             StreamReader txtReader = new StreamReader(filePath);
-
-            string lineString;
             
             while (!txtReader.EndOfStream)
             {
-                lineString = txtReader.ReadLine().Trim(); /* delete whitespace in front and tail of the string */
-                string[] lineData = lineString.Split(' ');
+                string line = txtReader.ReadLine().Trim(); /* delete whitespace in front and tail of the string */
+                string[] lineData = line.Split(' ');
 
                 if (lineData[0] == "solid")
                 {
                     while (lineData[0] != "endsolid")
                     {
-                        lineString = txtReader.ReadLine().Trim(); // facetnormal
-                        lineData = lineString.Split(' ');
+                        line = txtReader.ReadLine().Trim(); // facetnormal
+                        lineData = line.Split(' ');
 
                         if (lineData[0] == "endsolid") // check if we reach at the end of file
                         {
@@ -306,34 +282,34 @@ namespace STL_Tools
                             newMesh.normal3 = newMesh.normal1;
 
                             //----------------------------------------------------------------------
-                            lineString = txtReader.ReadLine(); // Just skip the OuterLoop line
+                            line = txtReader.ReadLine(); // Just skip the OuterLoop line
                             //----------------------------------------------------------------------
 
                             // Vertex1
-                            lineString = txtReader.ReadLine().Trim();
+                            line = txtReader.ReadLine().Trim();
                             /* reduce spaces until string has proper format for split */
-                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
-                            lineData = lineString.Split(' ');
+                            while (line.IndexOf("  ") != -1) line = line.Replace("  ", " ");
+                            lineData = line.Split(' ');
 
                             newMesh.vert1.x = float.Parse(lineData[1]); // x1
                             newMesh.vert1.y = float.Parse(lineData[2]); // y1
                             newMesh.vert1.z = float.Parse(lineData[3]); // z1
 
                             // Vertex2
-                            lineString = txtReader.ReadLine().Trim();
+                            line = txtReader.ReadLine().Trim();
                             /* reduce spaces until string has proper format for split */
-                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
-                            lineData = lineString.Split(' ');
+                            while (line.IndexOf("  ") != -1) line = line.Replace("  ", " ");
+                            lineData = line.Split(' ');
 
                             newMesh.vert2.x = float.Parse(lineData[1]); // x2
                             newMesh.vert2.y = float.Parse(lineData[2]); // y2
                             newMesh.vert2.z = float.Parse(lineData[3]); // z2
 
                             // Vertex3
-                            lineString = txtReader.ReadLine().Trim();
+                            line = txtReader.ReadLine().Trim();
                             /* reduce spaces until string has proper format for split */
-                            while (lineString.IndexOf("  ") != -1) lineString = lineString.Replace("  ", " ");
-                            lineData = lineString.Split(' ');
+                            while (line.IndexOf("  ") != -1) line = line.Replace("  ", " ");
+                            lineData = line.Split(' ');
 
                             newMesh.vert3.x = float.Parse(lineData[1]); // x3
                             newMesh.vert3.y = float.Parse(lineData[2]); // y3
@@ -341,23 +317,29 @@ namespace STL_Tools
                         }
                         catch
                         {
-                            processError = true;
-                            break;
+                            result = false;
+                            asciiStlData = null;
+                            return asciiStlData;
                         }
 
                         //----------------------------------------------------------------------
-                        lineString = txtReader.ReadLine(); // Just skip the endloop
+                        line = txtReader.ReadLine(); // Just skip the endloop
                         //----------------------------------------------------------------------
-                        lineString = txtReader.ReadLine(); // Just skip the endfacet
+                        line = txtReader.ReadLine(); // Just skip the endfacet
 
-                        meshList.Add(newMesh); // add mesh to meshList
+                        asciiStlData.meshList.Add(newMesh); // add mesh to meshList
 
                     } // while linedata[0]
                 } // if solid
             } // while !endofstream
 
-            return meshList.ToArray();
-        }
+            // TODO: review this, methods cycling through the whole list again and again!
+            asciiStlData.minVec = GetMinMeshPosition(asciiStlData.meshList);
+            asciiStlData.maxVec = GetMaxMeshPosition(asciiStlData.meshList);
+            asciiStlData.fileType = StlFileType.ASCII;
 
+            result = true;
+            return asciiStlData;
+        }
     }
 }
