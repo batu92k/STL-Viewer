@@ -129,27 +129,27 @@ namespace STLViewer
 
         private void ReadSelectedFile(string fileName)
         {
-            STLReader stlReader = new STLReader(fileName);
-            TriangleMesh[] meshArray = stlReader.ReadFile();
-            modelVAO = new Batu_GL.VAO_TRIANGLES();
-            modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(meshArray);
-            modelVAO.normalArray = STLExport.Get_Mesh_Normals(meshArray);
-            modelVAO.color = Color.Crimson;
-            minPos = stlReader.GetMinMeshPosition(meshArray);
-            maxPos = stlReader.GetMaxMeshPosition(meshArray);
-            orb.Reset_Orientation();
-            orb.Reset_Pan();
-            orb.Reset_Scale();
-            bool isProcessFailed = stlReader.Get_Process_Error();
-            ExportAsImageBt.Enabled = !isProcessFailed;
-
-            if (isProcessFailed)
+            STLReader stlReader = new STLReader();
+            bool isProcessSucceeded;
+            STLData stlData = stlReader.ReadAnyStlFile(fileName, out isProcessSucceeded);
+            ExportAsImageBt.Enabled = isProcessSucceeded;
+            if (stlData == null || !isProcessSucceeded)
             {
-                modelVAO = null;
                 /* if there is an error, deinitialize the gl monitor to clear the screen */
                 Batu_GL.Configure(GL_Monitor, Batu_GL.Ortho_Mode.CENTER);
                 GL_Monitor.SwapBuffers();
+                return;
             }
+
+            modelVAO = new Batu_GL.VAO_TRIANGLES();
+            modelVAO.parameterArray = STLExport.Get_Mesh_Vertices(stlData.meshList.ToArray());
+            modelVAO.normalArray = STLExport.Get_Mesh_Normals(stlData.meshList.ToArray());
+            modelVAO.color = Color.Crimson;
+            minPos = stlData.minVec;
+            maxPos = stlData.maxVec;
+            orb.Reset_Orientation();
+            orb.Reset_Pan();
+            orb.Reset_Scale();
         }
 
         private void FileMenuImportBt_Click(object sender, EventArgs e)
