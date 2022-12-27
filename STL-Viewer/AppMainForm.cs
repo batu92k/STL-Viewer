@@ -119,7 +119,8 @@ namespace STLViewer
             if (modelVAO != null) ConfigureBasicLighting(modelVAO.color);
             GL.Translate(orb.PanX, orb.PanY, 0);
             GL.Rotate(orb.orbitStr.angle, orb.orbitStr.ox, orb.orbitStr.oy, orb.orbitStr.oz);
-            GL.Scale(orb.scaleVal * kScaleFactor, orb.scaleVal * kScaleFactor, orb.scaleVal * kScaleFactor); // small multiplication factor to scaling
+            float objectScale = orb.scaleVal * kScaleFactor; // small multiplication factor to scaling
+            GL.Scale(objectScale, objectScale, objectScale);
             GL.Translate(-minPos.x, -minPos.y, -minPos.z);
             GL.Translate(-(maxPos.x - minPos.x) / 2.0f, -(maxPos.y - minPos.y) / 2.0f, -(maxPos.z - minPos.z) / 2.0f);
             if (modelVAO != null) modelVAO.Draw();
@@ -149,7 +150,32 @@ namespace STLViewer
             maxPos = stlData.maxVec;
             orb.Reset_Orientation();
             orb.Reset_Pan();
-            orb.Reset_Scale();
+            float initialScale = GetInitialScaleWithMargin(ref stlData, ref GL_Monitor, 5) / kScaleFactor;
+            orb.Set_Max_Scale(initialScale * 5);
+            orb.scaleVal = initialScale;
+        }
+
+        private float GetInitialScaleWithMargin(ref StlData stlData, ref OpenTK.GLControl glControl, float marginPercent = 5)
+        {
+            /* This is a very basic fit logic where we take the initial bounding box of the object 
+             * (means bounding box when no rotation applied to the object), apply the given margin from
+             * the GLControl objects borders and get the minimal scale needed. In case if we want to add
+             * a smarter method where it still able to fit the object while its rotated, then:
+             * - Get the initial bounding box
+             * - Apply rotation quaternion to the bounding box
+             * - Project the rotated bounding box to the XY plane
+             * - Calculate the max and mins again
+             * - Apply the below method
+             * 
+             * This is a possible Fit feature logic.
+             */
+            float deltaY = Math.Abs(stlData.maxVec.y - stlData.minVec.y);
+            float deltaX = Math.Abs(stlData.maxVec.x - stlData.minVec.x);
+            float proportionAfterMargin = ((100 - marginPercent) / 100.0f);
+            float scaleX = glControl.Bounds.Width * proportionAfterMargin / deltaX;
+            float scaleY = glControl.Bounds.Height * proportionAfterMargin / deltaY;
+
+            return Math.Min(scaleX, scaleY);
         }
 
         private void FileMenuImportBt_Click(object sender, EventArgs e)
@@ -284,9 +310,6 @@ namespace STLViewer
                 screenCaptureBitmap.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 screenCaptureBitmap.Save(fileName);
             }
-
-
-
         }
     }
 }
