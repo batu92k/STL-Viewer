@@ -23,7 +23,7 @@ Visualization tool for Binary and ASCII formatted STL files.
  * Drag-Drop feature implemented
  * Toolbar added to UI with Help and File menus
  * Mouse Orbit module upgraded
- * Tao Framework changed to more up to date OpenGL Frameork OpenTK
+ * Tao Framework changed to more up to date OpenGL Framework OpenTK
  * Mouse Orbit feature implemented to rotate, move, scale the object
  * Model alignment adjusted
  * OpenGL lighting and material features improved
